@@ -52,9 +52,25 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .play-btn:active{transform:scale(.98);}
 .play-btn:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.18);cursor:default;transform:none;}
 
+/* ── Info card ──────────────────────────────── */
+.info{background:var(--bg2);padding:11px 14px 12px;border-bottom:1px solid rgba(255,255,255,.05);min-height:72px;}
+.phase-bar{display:none;gap:5px;margin-bottom:6px;}
+.phase-pip{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.08);transition:background .3s;}
+.phase-pip.lit{background:#7dc837;}
+.info-name{font-size:14px;font-weight:900;color:#d4f07a;margin-bottom:3px;line-height:1.2;}
+.info-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.55;}
+.spot-callout{display:none;margin-top:10px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+.spot-callout-head{display:flex;align-items:center;gap:7px;padding:7px 10px;}
+.spot-callout-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;}
+.spot-callout-pos{font-size:11px;font-weight:900;letter-spacing:.03em;}
+.spot-callout-body{padding:6px 10px 9px;background:rgba(0,0,0,.2);}
+.spot-callout-text{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.75);line-height:1.5;}
+
 /* ── Scenario selector ──────────────────────── */
-.sc-wrap{background:var(--bg2);padding:9px 10px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sc-wrap{background:var(--bg2);padding:9px 10px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
 .sc-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.sc-label-runners{margin-top:8px;color:rgba(255,140,0,.5);}
+.sc-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 0;}
 .sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
 .sc-btn{font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;padding:7px 3px 6px;border-radius:8px;
   border:1.5px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.38);
@@ -89,20 +105,6 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .spot-clear{color:rgba(255,255,255,.22);}
 .spot-clear.on{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.5);}
 
-/* ── Info card ──────────────────────────────── */
-.info{background:var(--bg2);padding:11px 14px 12px;border-bottom:1px solid rgba(255,255,255,.05);min-height:72px;}
-.phase-bar{display:none;gap:5px;margin-bottom:6px;}
-.phase-pip{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.08);transition:background .3s;}
-.phase-pip.lit{background:#7dc837;}
-.info-name{font-size:14px;font-weight:900;color:#d4f07a;margin-bottom:3px;line-height:1.2;}
-.info-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.55;}
-.spot-callout{display:none;margin-top:10px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
-.spot-callout-head{display:flex;align-items:center;gap:7px;padding:7px 10px;}
-.spot-callout-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;}
-.spot-callout-pos{font-size:11px;font-weight:900;letter-spacing:.03em;}
-.spot-callout-body{padding:6px 10px 9px;background:rgba(0,0,0,.2);}
-.spot-callout-text{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.75);line-height:1.5;}
-
 /* ── Legend ─────────────────────────────────── */
 .legend{background:var(--bg4);padding:9px 14px 12px;display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;}
 .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.32);font-weight:700;}
@@ -115,8 +117,6 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .guide-hdr-line{flex:1;height:1px;background:rgba(255,255,255,.06);}
 .guide-hdr-text{font-size:10px;font-weight:800;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
 .guide-group-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.18);text-transform:uppercase;letter-spacing:.08em;padding:0 12px 6px;}
-
-/* Golden Rules box */
 .golden-rules{margin:0 10px 14px;border-radius:10px;overflow:hidden;border:1px solid rgba(212,240,122,.18);background:rgba(212,240,122,.05);}
 .golden-rules-head{display:flex;align-items:center;gap:8px;padding:10px 13px 8px;border-bottom:1px solid rgba(212,240,122,.1);}
 .golden-rules-icon{font-size:15px;line-height:1;}
@@ -127,7 +127,6 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .golden-rule-dot{width:6px;height:6px;border-radius:50%;background:#d4f07a;flex-shrink:0;margin-top:5px;opacity:.7;}
 .golden-rule-text{font-size:12px;color:rgba(255,255,255,.48);line-height:1.5;}
 .golden-rule-text strong{color:rgba(212,240,122,.8);font-weight:800;}
-
 .pos-card{background:var(--bg2);margin:0 10px 7px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.05);}
 .pos-card-head{padding:9px 13px 7px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.04);}
 .pos-badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.04em;flex-shrink:0;}
@@ -146,18 +145,15 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 
 <div class="hd">
   <div class="hd-title">Where Do I Go?</div>
-  <div class="hd-sub">8U Softball &nbsp;&middot;&nbsp; Dixie Youth Coach-Pitch</div>
+  <div class="hd-sub">8U Softball &nbsp;&middot;&nbsp; DYS Coach-Pitch &nbsp;&middot;&nbsp; Sweet Belles</div>
 </div>
 
-<!-- Field -->
 <div class="field-outer" id="fieldOuter"></div>
 
-<!-- PLAY BUTTON — above everything else -->
+<!-- PLAY BUTTON -->
 <div class="play-wrap">
   <button class="play-btn" id="playBtn" onclick="doPlay()" disabled>&#9654;&nbsp; Play</button>
 </div>
-
-
 
 <!-- INFO CARD -->
 <div class="info" id="infoBox">
@@ -180,24 +176,26 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
   </div>
 </div>
 
-
-
 <!-- PICK A PLAY -->
 <div class="sc-wrap">
-  <div class="sc-label">Pick a play</div>
+  <div class="sc-label">Standard plays</div>
   <div class="sc-grid" id="scGrid">
     <button class="sc-btn" onclick="selSc(0)"><span class="icon">&#9711;</span>Ball to<br>Pitcher</button>
     <button class="sc-btn" onclick="selSc(1)"><span class="icon">&#8592;</span>Left Side<br>(SS / 3B)</button>
     <button class="sc-btn" onclick="selSc(2)"><span class="icon">&#8594;</span>Right Side<br>(2B / 1B)</button>
     <button class="sc-btn" onclick="selSc(3)"><span class="icon">&#11044;</span>Ball to<br>Left Field</button>
     <button class="sc-btn" onclick="selSc(4)"><span class="icon">&#11044;</span>Ball to<br>Right Field</button>
-    <button class="sc-btn sc-runner" onclick="selSc(5)"><span class="icon">&#127939;</span>Runner on 1B<br>Left Side Hit</button>
+  </div>
+  <div class="sc-divider"></div>
+  <div class="sc-label sc-label-runners">&#127939; Runners on base</div>
+  <div class="sc-grid" id="scGridRunners">
+    <button class="sc-btn sc-runner" onclick="selSc(5)"><span class="icon">&#8592;</span>Runner 1B<br>Left Side Hit</button>
+    <button class="sc-btn sc-runner" onclick="selSc(6)"><span class="icon">&#11044;</span>Runner 2B<br>LF → 3rd</button>
+    <button class="sc-btn sc-runner" onclick="selSc(7)"><span class="icon">&#8679;</span>Pop Up!<br>Double Play</button>
   </div>
 </div>
 
-
-
-<!-- CONTROLS: PLAY SPEED + MY SPOT -->
+<!-- CONTROLS -->
 <div class="ctrl-panel">
   <div class="ctrl-row">
     <span class="ctrl-label">Play Speed</span>
@@ -224,8 +222,6 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
   </div>
 </div>
 
-
-
 <!-- LEGEND -->
 <div class="legend">
   <div class="leg"><div class="leg-dot" style="background:var(--col-p)"></div>Pitcher</div>
@@ -237,22 +233,13 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
   <div class="leg"><div class="leg-run"></div>Runner</div>
 </div>
 
-
-
-<!-- POSITION GUIDE -->
 <div class="guide-section" id="guideSection"></div>
 
 </div>
 <script>
-// ═══════════════════════════════════════════
-//  GEOMETRY
-// ═══════════════════════════════════════════
 const DS_W=440,DS_H=490;
 const PT={home:{x:220,y:463},b1:{x:381,y:302},b2:{x:220,y:141},b3:{x:59,y:302},mound:{x:220,y:302}};
 
-// ═══════════════════════════════════════════
-//  PLAYER DEFINITIONS
-// ═══════════════════════════════════════════
 const PDEF={
   P:   {sx:220,sy:302,color:'var(--col-p)',  sz:34,label:'P',  fs:11},
   '1B':{sx:360,sy:282,color:'var(--col-1b)', sz:33,label:'1B', fs:10},
@@ -278,204 +265,85 @@ const POS_COL={
 };
 const POS_NAMES={P:'Pitcher','1B':'First Base','2B':'Second Base',SS:'Shortstop','3B':'Third Base',LF:'Left Field',LCF:'Left Center',RCF:'Right Center',RF:'Right Field'};
 
-// ═══════════════════════════════════════════
-//  SCENARIOS
-// ═══════════════════════════════════════════
+// ─── ALL SCENARIOS ──────────────────────────
 const SCENARIOS=[
-  {// 0 — Ball to Pitcher
-    name:'Ball to pitcher / up the middle',runner:false,
-    desc:'Pitcher stops the ball and throws to 1st. 2B covers 2nd. SS drifts toward 2B as a backup — not stacking. LCF shades toward 2B. RF backs up the 1B line.',
-    hit:{x:220,y:305},thrower:'P',throwTo:{x:381,y:302},relay:null,
-    moves:{
-      P:   {x:220,y:305},
-      '1B':{x:379,y:300},
-      '2B':{x:232,y:150},
-      SS:  {x:196,y:178},  // drifts toward 2B but does NOT stack — clear separation
-      '3B':{x:62, y:295},
-      LF:  {x:60, y:170},
-      LCF: {x:188,y:86 },
-      RCF: {x:292,y:100},
-      RF:  {x:400,y:218},
-    },
-    spotlight:{
-      P:   'YOUR BALL! Get in front of it and throw to 1st base!',
-      '1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!',
-      '2B':'Sprint to 2nd base and be ready for a throw!',
-      SS:  'Drift toward 2nd as a backup — stay a few steps away, not on top of 2B.',
-      '3B':'Stay at 3rd base. Anchor your bag — do not leave it.',
-      LF:  'Hold your position. Watch for any ball that gets past the infield.',
-      LCF: 'Shift a little toward 2nd — ready to run down a wild throw.',
-      RCF: 'Move in behind 2nd base — back up the play.',
-      RF:  'Move toward 1st to back up an overthrow down the line.',
-    }
-  },
-  {// 1 — Left Side
-    name:'Ground ball — left side (SS / 3B)',runner:false,
-    desc:'Shortstop fields and fires to 1st. 2B covers 2nd. Pitcher drifts slightly right — stays near mound ready to receive the ball back. RF backs up the 1B line.',
-    hit:{x:155,y:218},thrower:'SS',throwTo:{x:381,y:302},relay:null,
-    moves:{
-      P:   {x:248,y:300},
-      '1B':{x:379,y:300},
-      '2B':{x:232,y:150},
-      SS:  {x:155,y:218},
-      '3B':{x:62, y:295},
-      LF:  {x:130,y:178},
-      LCF: {x:126,y:114},
-      RCF: {x:295,y:90 },
-      RF:  {x:400,y:218},
-    },
-    spotlight:{
-      P:   'Drift slightly right and stay near the mound — get ready to receive the ball back!',
-      '1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!',
-      '2B':'Sprint to 2nd base — cover the bag in case the throw comes your way!',
-      SS:  'YOUR BALL! Field it clean and throw to 1st base!',
-      '3B':'Stay at 3rd base. Anchor your bag.',
-      LF:  'Back up behind the shortstop — be there if the ball gets past.',
-      LCF: 'Shift in — back up the 2nd base area in case of a wild throw.',
-      RCF: 'Move in and back up 2nd base.',
-      RF:  'Move toward 1st to back up an overthrow down the line.',
-    }
-  },
-  {// 2 — Right Side
-    name:'Ground ball — right side (2B / 1B)',runner:false,
-    desc:'2B fields and throws to 1st. Shortstop sprints to cover 2nd. Pitcher stays near mound. LCF shades toward 2B. RF backs up 1B line.',
-    hit:{x:278,y:218},thrower:'2B',throwTo:{x:381,y:302},relay:null,
-    moves:{
-      P:   {x:248,y:300},
-      '1B':{x:379,y:300},
-      '2B':{x:278,y:218},
-      SS:  {x:222,y:150},
-      '3B':{x:62, y:295},
-      LF:  {x:60, y:170},
-      LCF: {x:188,y:86 },
-      RCF: {x:312,y:130},
-      RF:  {x:400,y:218},
-    },
-    spotlight:{
-      P:   'Drift slightly right and stay near the mound — get ready to receive the ball back!',
-      '1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!',
-      '2B':'YOUR BALL! Field it clean and throw to 1st base!',
-      SS:  'Sprint to 2nd base — cover the bag right now!',
-      '3B':'Stay at 3rd base. Anchor your bag — do not leave it.',
-      LF:  'Hold your position. Stay ready.',
-      LCF: 'Shift toward 2nd — be ready to run down a wild throw.',
-      RCF: 'Back up the 2nd base area.',
-      RF:  'Move toward 1st to back up an overthrow down the line.',
-    }
-  },
-  {// 3 — Left Field
-    name:'Ball to left field',runner:false,
-    desc:'LF charges and throws to SS relay. SS steps out toward LF. 2B covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. RCF shifts toward 2B.',
-    hit:{x:52,y:92},thrower:'LF',throwTo:{x:145,y:168},
-    relay:{player:'SS',relayPos:{x:145,y:168},relayTo:{x:232,y:150}},
-    moves:{
-      P:   {x:198,y:348},
-      '1B':{x:379,y:300},
-      '2B':{x:232,y:150},
-      SS:  {x:145,y:168},
-      '3B':{x:62, y:295},
-      LF:  {x:52, y:92 },
-      LCF: {x:108,y:118},
-      RCF: {x:265,y:105},
-      RF:  {x:400,y:185},
-    },
-    spotlight:{
-      P:   'Drift toward home plate — you are the cutoff if a throw comes home. There is no catcher!',
-      '1B':'Stay at 1st base and hold your spot.',
-      '2B':'Cover 2nd bag — be ready for the relay throw from SS!',
-      SS:  'Step out toward LF — catch the relay throw and fire to 2nd!',
-      '3B':'Anchor 3rd base. A runner may be heading your way.',
-      LF:  'YOUR BALL! Charge it hard and throw to the shortstop relay!',
-      LCF: 'Back up LF — if she misses it, you get the ball!',
-      RCF: 'Shift in toward 2nd — cover any wild relay throw.',
-      RF:  'Drift toward 1st base — back up the right side.',
-    }
-  },
-  {// 4 — Right Field
-    name:'Ball to right field',runner:false,
-    desc:'RF grabs it and throws to 2B relay. 2B steps out toward RF. SS covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. LCF shifts toward 2B.',
-    hit:{x:418,y:92},thrower:'RF',throwTo:{x:298,y:168},
-    relay:{player:'2B',relayPos:{x:298,y:168},relayTo:{x:222,y:150}},
-    moves:{
-      P:   {x:198,y:348},
-      '1B':{x:379,y:300},
-      '2B':{x:298,y:168},
-      SS:  {x:222,y:150},
-      '3B':{x:62, y:295},
-      LF:  {x:90, y:142},
-      LCF: {x:205,y:98 },
-      RCF: {x:338,y:108},
-      RF:  {x:418,y:92 },
-    },
-    spotlight:{
-      P:   'Drift toward home plate — you are the cutoff if a throw comes home. There is no catcher!',
-      '1B':'Stay at 1st base and hold your spot.',
-      '2B':'Step out toward RF — catch the relay throw and fire to 2nd!',
-      SS:  'Cover 2nd bag — be ready for the relay from 2B!',
-      '3B':'Anchor 3rd base. A runner may be heading your way.',
-      LF:  'Drift a little toward 2nd — cover a wild throw that gets past 2B.',
-      LCF: 'Shift in toward 2nd — be ready to run down a wild relay.',
-      RCF: 'Back up RF — if she misses it, you get the ball!',
-      RF:  'YOUR BALL! Charge it hard and throw to the 2B relay!',
-    }
-  },
-  {// 5 — Runner on 1B, Left Side
-    name:'Runner on 1B — left side hit',runner:true,
-    desc:'Runner on 1st! SS fields and throws to 2nd for the force out. 2B covers 2nd bag. 1B stays at the bag. Pitcher stays near mound ready to receive the ball back.',
-    hit:{x:155,y:218},thrower:'SS',throwTo:{x:232,y:150},relay:null,
-    moves:{
-      P:   {x:248,y:300},
-      '1B':{x:379,y:300},
-      '2B':{x:232,y:150},
-      SS:  {x:155,y:218},
-      '3B':{x:62, y:295},
-      LF:  {x:130,y:178},
-      LCF: {x:126,y:114},
-      RCF: {x:295,y:90 },
-      RF:  {x:400,y:218},
-    },
-    spotlight:{
-      P:   'Stay near the mound — freeze the runners by getting the ball back fast!',
-      '1B':'Stay at 1st bag — the runner is coming, hold your ground.',
-      '2B':'Cover 2nd bag — the runner is heading to you! Get ready for the force out!',
-      SS:  'YOUR BALL! Field it and throw to 2nd — get the lead runner!',
-      '3B':'Stay at 3rd. If the play goes wrong, the runner might keep going — be ready.',
-      LF:  'Back up behind the shortstop — be there if the ball gets past.',
-      LCF: 'Shift in — back up the 2nd base area.',
-      RCF: 'Move in and back up 2nd base.',
-      RF:  'Move toward 1st to back up an overthrow.',
-    }
-  },
+  // 0 — Ball to Pitcher
+  {name:'Ball to pitcher / up the middle',runner:false,
+   desc:'Pitcher stops the ball and throws to 1st. 2B covers 2nd. SS drifts toward 2B as backup — not stacking. LCF shades toward 2B. RF backs up the 1B line.',
+   hit:{x:220,y:305},thrower:'P',throwTo:{x:381,y:302},relay:null,
+   moves:{P:{x:220,y:305},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:196,y:178},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:292,y:100},RF:{x:400,y:218}},
+   spotlight:{P:'YOUR BALL! Get in front of it and throw to 1st base!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base and be ready for a throw!',SS:'Drift toward 2nd as a backup — stay a few steps away, not on top of 2B.','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Watch for any ball past the infield.',LCF:'Shift a little toward 2nd — ready to run down a wild throw.',RCF:'Move in behind 2nd base — back up the play.',RF:'Move toward 1st to back up an overthrow down the line.'}},
+
+  // 1 — Left Side
+  {name:'Ground ball — left side (SS / 3B)',runner:false,
+   desc:'Shortstop fields and fires to 1st. 2B covers 2nd. Pitcher drifts slightly right — stays near mound ready to receive ball back. RF backs up the 1B line.',
+   hit:{x:155,y:218},thrower:'SS',throwTo:{x:381,y:302},relay:null,
+   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
+   spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base — cover the bag in case the throw comes your way!',SS:'YOUR BALL! Field it clean and throw to 1st base!','3B':'Stay at 3rd base. Anchor your bag.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area in case of a wild throw.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow down the line.'}},
+
+  // 2 — Right Side
+  {name:'Ground ball — right side (2B / 1B)',runner:false,
+   desc:'2B fields and throws to 1st. Shortstop sprints to cover 2nd. Pitcher stays near mound. LCF shades toward 2B. RF backs up 1B line.',
+   hit:{x:278,y:218},thrower:'2B',throwTo:{x:381,y:302},relay:null,
+   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:278,y:218},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:312,y:130},RF:{x:400,y:218}},
+   spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'YOUR BALL! Field it clean and throw to 1st base!',SS:'Sprint to 2nd base — cover the bag right now!','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Stay ready.',LCF:'Shift toward 2nd — be ready to run down a wild throw.',RCF:'Back up the 2nd base area.',RF:'Move toward 1st to back up an overthrow down the line.'}},
+
+  // 3 — Left Field
+  {name:'Ball to left field',runner:false,
+   desc:'LF charges and throws to SS relay. SS steps out toward LF. 2B covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. RCF shifts toward 2B.',
+   hit:{x:52,y:92},thrower:'LF',throwTo:{x:145,y:168},relay:{player:'SS',relayPos:{x:145,y:168},relayTo:{x:232,y:150}},
+   moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:145,y:168},'3B':{x:62,y:295},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
+   spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. There is no catcher!','1B':'Stay at 1st base and hold your spot.','2B':'Cover 2nd bag — be ready for the relay throw from SS!',SS:'Step out toward LF — catch the relay throw and fire to 2nd!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'YOUR BALL! Charge it hard and throw to the shortstop relay!',LCF:'Back up LF — if she misses it, you get the ball!',RCF:'Shift in toward 2nd — cover any wild relay throw.',RF:'Drift toward 1st base — back up the right side.'}},
+
+  // 4 — Right Field
+  {name:'Ball to right field',runner:false,
+   desc:'RF grabs it and throws to 2B relay. 2B steps out toward RF. SS covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. LCF shifts toward 2B.',
+   hit:{x:418,y:92},thrower:'RF',throwTo:{x:298,y:168},relay:{player:'2B',relayPos:{x:298,y:168},relayTo:{x:222,y:150}},
+   moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:298,y:168},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:90,y:142},LCF:{x:205,y:98},RCF:{x:338,y:108},RF:{x:418,y:92}},
+   spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. There is no catcher!','1B':'Stay at 1st base and hold your spot.','2B':'Step out toward RF — catch the relay throw and fire to 2nd!',SS:'Cover 2nd bag — be ready for the relay from 2B!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'Drift a little toward 2nd — cover a wild throw that gets past 2B.',LCF:'Shift in toward 2nd — be ready to run down a wild relay.',RCF:'Back up RF — if she misses it, you get the ball!',RF:'YOUR BALL! Charge it hard and throw to the 2B relay!'}},
+
+  // 5 — Runner on 1B, Left Side Hit
+  {name:'Runner on 1B — left side hit',runner:true,
+   runnerStart:PT.b1, runnerEnd:{x:298,y:222}, runnerOut:true,
+   desc:'Runner on 1st! SS fields and throws to 2nd for the force out on the lead runner. 2B covers 2nd. 1B stays at the bag. Pitcher stays near mound ready to receive ball back.',
+   hit:{x:155,y:218},thrower:'SS',throwTo:{x:232,y:150},relay:null,
+   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
+   spotlight:{P:'Stay near the mound — freeze the runners by getting the ball back fast!','1B':'Stay at 1st bag — the runner is coming, hold your ground.','2B':'Cover 2nd bag — the runner is heading to you! Get ready for the force out!',SS:'YOUR BALL! Field it and throw to 2nd — get the lead runner!','3B':'Stay at 3rd. If the play goes wrong, the runner might keep going — be ready.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow.'}},
+
+  // 6 — Runner on 2B, Left Field Hit → throw to 3B
+  {name:'Runner on 2B — LF hit, throw to 3rd',runner:true,
+   runnerStart:PT.b2, runnerEnd:{x:128,y:228}, runnerHeld:true,
+   desc:'Runner on 2nd trying to score! LF charges and throws directly to 3rd base to hold the runner. SS backs up 3rd. Pitcher drifts toward home — last line of defense!',
+   hit:{x:52,y:92},thrower:'LF',throwTo:{x:60,y:300},relay:null,
+   moves:{P:{x:198,y:415},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:90,y:258},'3B':{x:60,y:300},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
+   spotlight:{P:'Drift toward home plate — if the runner beats 3B, YOU are the last stop before she scores!','1B':'Stay at 1st base. Hold your spot.','2B':'Cover 2nd bag — the runner has left it, lock it down.',SS:'Back up 3rd — if the throw is wild, you stop the runner from scoring!','3B':'HOLD THE BAG! Catch the throw from LF and make the tag — do not let her score!',LF:'YOUR BALL! Charge it fast and throw DIRECTLY to 3rd base — hold that runner!',LCF:'Back up LF — if she misses it, you field and throw to 3rd!',RCF:'Shift toward center. Be ready if the ball comes your way.',RF:'Hold your position and back up the right side.'}},
+
+  // 7 — Runner on 1B, Pop Up to SS, double play
+  {name:'Pop up to SS — double play!',runner:true,
+   runnerStart:PT.b1, runnerEnd:{x:318,y:238}, runnerOut:true,
+   desc:'Runner on 1st took off running. SS catches the pop up — out #1! Runner has to get back to 1st. SS fires to 1B — out #2! Double play! 1B must stay on the bag.',
+   hit:{x:168,y:215},thrower:'SS',throwTo:{x:379,y:300},relay:null,
+   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:265,y:178},SS:{x:168,y:215},'3B':{x:62,y:295},LF:{x:50,y:160},LCF:{x:170,y:70},RCF:{x:310,y:70},RF:{x:400,y:218}},
+   spotlight:{P:'Stay near the mound — be ready to receive the ball back once the double play is done.','1B':'STAY ON THE BAG! The runner left early — catch the throw for the double play! Do not move!','2B':'Cover 2nd base in case the runner tries to reach there.',SS:'YOUR BALL — catch the pop up for out #1, then fire to 1st for out #2! Double play!','3B':'Stay at 3rd base. Anchor your bag.',LF:'Hold your position. Stay alert.',LCF:'Hold position — back up the infield.',RCF:'Hold position — back up the 2nd base area.',RF:'Back up the 1st base line.'}},
 ];
 
-// ═══════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════
+// ─── STATE ──────────────────────────────────
 let scale=1,currentSc=-1,playing=false,speedMult=1.85,mySpot=null;
 let playerEls={},ballEl=null,runnerEl=null,fieldOuter=null;
 
-// ═══════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════
+// ─── HELPERS ────────────────────────────────
 function d(base){return Math.round(base*speedMult);}
-function playerTransStr(){
-  const t=(0.95*speedMult).toFixed(2);
-  return `left ${t}s cubic-bezier(.34,1.35,.64,1),top ${t}s cubic-bezier(.34,1.35,.64,1),box-shadow .2s,opacity .35s`;
-}
-function runnerTransStr(){
-  return `left ${(1.1*speedMult).toFixed(2)}s cubic-bezier(.34,1.2,.64,1),top ${(1.1*speedMult).toFixed(2)}s cubic-bezier(.34,1.2,.64,1)`;
-}
+function playerTransStr(){const t=(0.95*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.35,.64,1),top ${t}s cubic-bezier(.34,1.35,.64,1),box-shadow .2s,opacity .35s`;}
+function runnerTransStr(){const t=(1.1*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.2,.64,1),top ${t}s cubic-bezier(.34,1.2,.64,1)`;}
 function applyTransitions(){Object.values(playerEls).forEach(el=>{el.style.transition=playerTransStr();});}
 
-// ═══════════════════════════════════════════
-//  SPOTLIGHT
-// ═══════════════════════════════════════════
+// ─── SPOTLIGHT ──────────────────────────────
 function applySpotlight(){
   Object.keys(playerEls).forEach(id=>{
     const el=playerEls[id];
     el.classList.remove('spotlight','dimmed');
     if(mySpot===null)return;
-    if(id===mySpot) el.classList.add('spotlight');
+    if(id===mySpot)el.classList.add('spotlight');
     else el.classList.add('dimmed');
   });
   updateSpotCallout();
@@ -484,82 +352,59 @@ function updateSpotCallout(){
   const box=document.getElementById('spotCallout');
   if(mySpot===null||currentSc<0){box.style.display='none';return;}
   const sc=SCENARIOS[currentSc],col=POS_COL[mySpot];
-  const head=document.getElementById('spotCalloutHead');
-  head.style.background=col.bg;
+  document.getElementById('spotCalloutHead').style.background=col.bg;
   document.getElementById('spotCalloutDot').style.background=col.border;
   const posLabel=document.getElementById('spotCalloutPos');
-  posLabel.style.color=col.text;
-  posLabel.textContent=POS_NAMES[mySpot].toUpperCase();
+  posLabel.style.color=col.text; posLabel.textContent=POS_NAMES[mySpot].toUpperCase();
   document.getElementById('spotCalloutText').textContent=sc.spotlight[mySpot];
   box.style.display='block';
 }
 
-// ═══════════════════════════════════════════
-//  BUILD FIELD
-// ═══════════════════════════════════════════
+// ─── BUILD FIELD ────────────────────────────
 function buildField(){
   fieldOuter=document.getElementById('fieldOuter');
   const aw=fieldOuter.clientWidth||440;
   scale=aw/DS_W;
   fieldOuter.style.height=(DS_H*scale)+'px';
-
   const ns='http://www.w3.org/2000/svg';
   const svg=document.createElementNS(ns,'svg');
   svg.setAttribute('viewBox',`0 0 ${DS_W} ${DS_H}`);
   svg.setAttribute('width','100%'); svg.setAttribute('height','100%');
   svg.style.cssText='position:absolute;top:0;left:0;z-index:1;';
-
   function el(tag,attrs){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
-  function tlabel(x,y,str,anchor='middle'){
-    const t=el('text',{x,y,'text-anchor':anchor,'font-size':'10.5',fill:'rgba(255,255,255,0.5)','font-family':'Nunito,sans-serif','font-weight':'800'});
-    t.textContent=str;return t;
-  }
-
+  function tlabel(x,y,str,anchor='middle'){const t=el('text',{x,y,'text-anchor':anchor,'font-size':'10.5',fill:'rgba(255,255,255,0.5)','font-family':'Nunito,sans-serif','font-weight':'800'});t.textContent=str;return t;}
   svg.appendChild(el('rect',{x:0,y:0,width:DS_W,height:DS_H,fill:'#4a8c1c'}));
   svg.appendChild(el('polygon',{points:`0,${DS_H} ${PT.home.x},${PT.home.y} ${DS_W},${DS_H}`,fill:'rgba(0,0,0,.07)'}));
   svg.appendChild(el('polygon',{points:`${PT.home.x},${PT.home.y} ${PT.b1.x},${PT.b1.y} ${PT.b2.x},${PT.b2.y} ${PT.b3.x},${PT.b3.y}`,fill:'#c8943a'}));
-  svg.appendChild(el('polygon',{
-    points:`${PT.mound.x},${PT.home.y-38} ${PT.b1.x-38},${PT.b1.y} ${PT.mound.x},${PT.b2.y+38} ${PT.b3.x+38},${PT.b3.y}`,
-    fill:'rgba(58,110,20,.22)'}));
+  svg.appendChild(el('polygon',{points:`${PT.mound.x},${PT.home.y-38} ${PT.b1.x-38},${PT.b1.y} ${PT.mound.x},${PT.b2.y+38} ${PT.b3.x+38},${PT.b3.y}`,fill:'rgba(58,110,20,.22)'}));
   svg.appendChild(el('line',{x1:220,y1:463,x2:480,y2:203,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
-  svg.appendChild(el('line',{x1:0,  y1:243,x2:220,y2:463,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
-  [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>
-    svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'rgba(255,255,255,.5)','stroke-width':'2.5'})));
+  svg.appendChild(el('line',{x1:0,y1:243,x2:220,y2:463,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
+  [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'rgba(255,255,255,.5)','stroke-width':'2.5'})));
   svg.appendChild(el('circle',{cx:PT.mound.x,cy:PT.mound.y,r:26,fill:'#daa848',opacity:'.4',stroke:'rgba(255,255,255,.22)','stroke-width':'1.5'}));
-  [{c:PT.home,s:14},{c:PT.b1,s:12},{c:PT.b2,s:12},{c:PT.b3,s:12}].forEach(({c,s})=>
-    svg.appendChild(el('rect',{x:c.x-s/2,y:c.y-s/2,width:s,height:s,fill:'white',stroke:'rgba(160,140,100,.5)','stroke-width':'1',transform:`rotate(45,${c.x},${c.y})`})));
+  [{c:PT.home,s:14},{c:PT.b1,s:12},{c:PT.b2,s:12},{c:PT.b3,s:12}].forEach(({c,s})=>svg.appendChild(el('rect',{x:c.x-s/2,y:c.y-s/2,width:s,height:s,fill:'white',stroke:'rgba(160,140,100,.5)','stroke-width':'1',transform:`rotate(45,${c.x},${c.y})`})));
   svg.appendChild(tlabel(PT.home.x,PT.home.y+20,'Home'));
   svg.appendChild(tlabel(PT.b2.x,PT.b2.y-16,'2B'));
   svg.appendChild(tlabel(PT.b1.x+18,PT.b1.y+5,'1B','start'));
   svg.appendChild(tlabel(PT.b3.x-18,PT.b3.y+5,'3B','end'));
   fieldOuter.appendChild(svg);
-
   Object.entries(PDEF).forEach(([id,p])=>{
     const div=document.createElement('div');
     div.className='player'; div.id='pl-'+id;
     div.style.cssText=`width:${p.sz}px;height:${p.sz}px;background:${p.color};font-size:${p.fs}px;left:${p.sx*scale}px;top:${p.sy*scale}px;`;
-    div.textContent=p.label;
-    fieldOuter.appendChild(div);
-    playerEls[id]=div;
+    div.textContent=p.label; fieldOuter.appendChild(div); playerEls[id]=div;
   });
-
   runnerEl=document.createElement('div');
   runnerEl.className='runner';
   runnerEl.style.cssText=`width:20px;height:20px;background:rgba(255,120,0,.55);font-size:9px;left:${PT.b1.x*scale}px;top:${PT.b1.y*scale}px;`;
-  runnerEl.textContent='R';
-  fieldOuter.appendChild(runnerEl);
-
+  runnerEl.textContent='R'; fieldOuter.appendChild(runnerEl);
   ballEl=document.createElement('div');
   ballEl.className='ball';
   ballEl.style.cssText=`width:16px;height:16px;left:${PT.home.x*scale}px;top:${PT.home.y*scale}px;`;
   fieldOuter.appendChild(ballEl);
-
   applyTransitions();
 }
 
-// ═══════════════════════════════════════════
-//  RESET
-// ═══════════════════════════════════════════
+// ─── RESET ──────────────────────────────────
 function resetPlayers(instant){
   Object.entries(PDEF).forEach(([id,p])=>{
     const el=playerEls[id];
@@ -568,24 +413,24 @@ function resetPlayers(instant){
     el.classList.remove('has-ball');
     if(instant)setTimeout(()=>{el.style.transition=playerTransStr();applySpotlight();},35);
   });
-  runnerEl.style.transition='none';
-  runnerEl.style.display='none';
-  runnerEl.style.left=(PT.b1.x*scale)+'px'; runnerEl.style.top=(PT.b1.y*scale)+'px';
+  runnerEl.style.transition='none'; runnerEl.style.opacity='1'; runnerEl.style.display='none';
   setTimeout(()=>{runnerEl.style.transition=runnerTransStr();},35);
   ballEl.style.display='none';
   ballEl.style.left=(PT.home.x*scale)+'px'; ballEl.style.top=(PT.home.y*scale)+'px';
 }
 
-// ═══════════════════════════════════════════
-//  BALL ANIMATION
-// ═══════════════════════════════════════════
+function placeRunner(sc){
+  const rs=sc.runnerStart||PT.b1;
+  runnerEl.style.left=(rs.x*scale)+'px'; runnerEl.style.top=(rs.y*scale)+'px';
+  runnerEl.style.display='flex';
+}
+
+// ─── BALL ANIMATION ──────────────────────────
 function animBall(fx,fy,tx,ty,dur,cb){
   ballEl.style.display='block';
-  const t0=performance.now();
-  const fxs=fx*scale,fys=fy*scale,txs=tx*scale,tys=ty*scale;
+  const t0=performance.now(),fxs=fx*scale,fys=fy*scale,txs=tx*scale,tys=ty*scale;
   function frame(now){
-    const p=Math.min((now-t0)/dur,1);
-    const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    const p=Math.min((now-t0)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
     ballEl.style.left=(fxs+(txs-fxs)*e)+'px'; ballEl.style.top=(fys+(tys-fys)*e)+'px';
     if(p<1)requestAnimationFrame(frame);
     else{ballEl.style.left=txs+'px';ballEl.style.top=tys+'px';if(cb)cb();}
@@ -593,14 +438,10 @@ function animBall(fx,fy,tx,ty,dur,cb){
   requestAnimationFrame(frame);
 }
 
-// ═══════════════════════════════════════════
-//  PHASE PIPS
-// ═══════════════════════════════════════════
+// ─── PIPS ────────────────────────────────────
 function setPips(n){[0,1,2,3].forEach(i=>document.getElementById('pp'+i).classList.toggle('lit',i<n));}
 
-// ═══════════════════════════════════════════
-//  SET SPEED
-// ═══════════════════════════════════════════
+// ─── SET SPEED ───────────────────────────────
 function setSpeed(mult,key){
   if(playing)return;
   speedMult=mult;
@@ -608,33 +449,26 @@ function setSpeed(mult,key){
   applyTransitions();
 }
 
-// ═══════════════════════════════════════════
-//  SET SPOT
-// ═══════════════════════════════════════════
+// ─── SET SPOT ────────────────────────────────
 function setSpot(pos){
   mySpot=pos;
   document.querySelectorAll('.spot-btn').forEach(b=>{
     const bp=b.dataset.pos||null;
-    b.classList.remove('on');
-    b.style.background=''; b.style.borderColor=''; b.style.color='';
+    b.classList.remove('on'); b.style.background=''; b.style.borderColor=''; b.style.color='';
     if(pos===null&&bp===null){b.classList.add('on');return;}
-    if(bp===pos){
-      b.classList.add('on');
-      const col=POS_COL[pos];
-      b.style.background=col.bg; b.style.borderColor=col.border; b.style.color=col.text;
-    }
+    if(bp===pos){b.classList.add('on');const col=POS_COL[pos];b.style.background=col.bg;b.style.borderColor=col.border;b.style.color=col.text;}
   });
   applySpotlight();
 }
 
-// ═══════════════════════════════════════════
-//  SELECT SCENARIO
-// ═══════════════════════════════════════════
+// ─── SELECT SCENARIO ─────────────────────────
+// Collect all sc-btn across both grids in DOM order
+function allScBtns(){return document.querySelectorAll('.sc-btn');}
+
 function selSc(i){
   if(playing)return;
-  currentSc=i;
-  resetPlayers(true);
-  document.querySelectorAll('.sc-btn').forEach((b,j)=>b.classList.toggle('on',j===i));
+  currentSc=i; resetPlayers(true);
+  allScBtns().forEach((b,j)=>b.classList.toggle('on',j===i));
   const sc=SCENARIOS[i];
   document.getElementById('infoName').textContent=sc.name;
   document.getElementById('infoDesc').textContent=sc.desc;
@@ -642,18 +476,11 @@ function selSc(i){
   setPips(0);
   const btn=document.getElementById('playBtn');
   btn.disabled=false; btn.textContent='\u25B6\u00A0 Play';
-  if(sc.runner){
-    setTimeout(()=>{
-      runnerEl.style.display='flex';
-      runnerEl.style.left=(PT.b1.x*scale)+'px'; runnerEl.style.top=(PT.b1.y*scale)+'px';
-    },50);
-  }
+  if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
   updateSpotCallout();
 }
 
-// ═══════════════════════════════════════════
-//  PLAY
-// ═══════════════════════════════════════════
+// ─── PLAY ────────────────────────────────────
 function doPlay(){
   if(currentSc<0||playing)return;
   playing=true;
@@ -661,28 +488,22 @@ function doPlay(){
   btn.disabled=true; btn.textContent='Playing\u2026';
   const sc=SCENARIOS[currentSc];
   resetPlayers(true);
-  if(sc.runner){
-    setTimeout(()=>{
-      runnerEl.style.display='flex';
-      runnerEl.style.left=(PT.b1.x*scale)+'px'; runnerEl.style.top=(PT.b1.y*scale)+'px';
-    },50);
-  }
+  if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
 
   setTimeout(()=>{
     setPips(1);
     animBall(PT.home.x,PT.home.y,sc.hit.x,sc.hit.y,d(420),()=>{
       setPips(2);
       Object.entries(sc.moves).forEach(([id,dest],i)=>{
-        setTimeout(()=>{
-          playerEls[id].style.left=(dest.x*scale)+'px';
-          playerEls[id].style.top=(dest.y*scale)+'px';
-        },i*22);
+        setTimeout(()=>{playerEls[id].style.left=(dest.x*scale)+'px';playerEls[id].style.top=(dest.y*scale)+'px';},i*22);
       });
+      // Runner advances to their end position
       if(sc.runner){
         setTimeout(()=>{
           runnerEl.style.transition=runnerTransStr();
-          runnerEl.style.left=(PT.b2.x*scale)+'px'; runnerEl.style.top=(PT.b2.y*scale)+'px';
-        },180);
+          const re=sc.runnerEnd||PT.b2;
+          runnerEl.style.left=(re.x*scale)+'px'; runnerEl.style.top=(re.y*scale)+'px';
+        },200);
       }
       setTimeout(()=>{playerEls[sc.thrower].classList.add('has-ball');},d(380));
       setTimeout(()=>{
@@ -696,7 +517,7 @@ function doPlay(){
               playerEls[sc.relay.player].classList.remove('has-ball');
               animBall(sc.relay.relayPos.x,sc.relay.relayPos.y,sc.relay.relayTo.x,sc.relay.relayTo.y,d(310),returnBall);
             },d(360));
-          } else { returnBall(); }
+          } else {returnBall();}
         });
       },d(1080));
     });
@@ -704,10 +525,22 @@ function doPlay(){
 
   function returnBall(){
     setPips(4);
+    if(sc.runner && sc.runnerOut){
+      setTimeout(()=>{
+        runnerEl.style.transition='opacity 0.7s ease';
+        runnerEl.style.opacity='0';
+      }, d(300));
+    }
+    if(sc.runner && sc.runnerHeld){
+      setTimeout(()=>{
+        runnerEl.style.transition=runnerTransStr();
+        runnerEl.style.left=(sc.runnerStart.x*scale)+'px';
+        runnerEl.style.top=(sc.runnerStart.y*scale)+'px';
+      }, d(300));
+    }
     document.getElementById('infoDesc').textContent='Kill the play! Ball goes back to the pitcher — all runners are frozen. Pitcher gets back to the circle.';
     if(mySpot)updateSpotCallout();
-    const bx=parseFloat(ballEl.style.left)/scale;
-    const by=parseFloat(ballEl.style.top)/scale;
+    const bx=parseFloat(ballEl.style.left)/scale,by=parseFloat(ballEl.style.top)/scale;
     setTimeout(()=>{
       playerEls['P'].style.left=(PT.mound.x*scale)+'px'; playerEls['P'].style.top=(PT.mound.y*scale)+'px';
       animBall(bx,by,PT.mound.x,PT.mound.y,d(500),()=>{
@@ -716,69 +549,32 @@ function doPlay(){
       });
     },d(320));
   }
-
-  function done(){
-    playing=false; btn.disabled=false; btn.textContent='\u21BA\u00A0 Play Again';
-  }
+  function done(){playing=false;btn.disabled=false;btn.textContent='\u21BA\u00A0 Play Again';}
 }
 
-// ═══════════════════════════════════════════
-//  POSITION GUIDE DATA
-// ═══════════════════════════════════════════
+// ─── GUIDE ───────────────────────────────────
 const GUIDE=[
-  {id:'P',badge:'#c47028',bbg:'rgba(139,69,19,.18)',name:'Pitcher',nick:'The Circle',
-   jobs:[{label:'Be the Wall',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Stop anything hit up the middle. Get your body in front of the ball — keep it in the infield.'},
-         {label:'Make the Throw',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Field it, look at 1st base right away, and make a clean overhand throw.'},
-         {label:'Kill the Play',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Runners stopped? Raise your hands or run it back to the coach. Get back to your circle!'}]},
-  {id:'1B',badge:'#0d9e74',bbg:'rgba(7,110,80,.18)',name:'First Base',nick:'The Target',
-   jobs:[{label:'Be the Target',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit anywhere else? Sprint to 1st, foot on the bag, glove up high as a big target.'},
-         {label:'Field & Touch',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit to you? Pick it up and step on 1st yourself — no throw needed.'},
-         {label:'Safety Net',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Stay alert for overthrows — stop the ball from rolling into the outfield.'}]},
-  {id:'2B',badge:'#1e7fd4',bbg:'rgba(19,85,160,.18)',name:'Second Base',nick:'The Bridge',
-   jobs:[{label:'Field to First',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball hit to you? First look is 1st base. Throw it there.'},
-         {label:'Cover the Bag',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to pitcher or shortstop? Sprint to 2nd and be ready for a throw or a tag.'},
-         {label:'RF Relay',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to right field? Step out toward RF — catch the throw and fire to 2nd.'}]},
-  {id:'SS',badge:'#e03c14',bbg:'rgba(184,48,16,.18)',name:'Shortstop',nick:'The Vacuum',
-   jobs:[{label:'Own the Gap',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'You are the infield leader. Everything hit between 2nd and 3rd base is yours.'},
-         {label:'Runner on 1st?',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Look to 2nd for the force out. Underhand if close, overhand if far. Not sure? Hold it.'},
-         {label:'LF Relay',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Ball to left field? Step out toward LF — catch the throw and fire to 2nd.'}]},
-  {id:'3B',badge:'#7040dc',bbg:'rgba(83,40,168,.18)',name:'Third Base',nick:'Hot Corner',
-   jobs:[{label:'Stop It First',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'The Hot Corner gets rockets. Keep the ball in front of you — body block if you have to.'},
-         {label:'The Long Throw',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Fielded clean? Big power step and fire all the way to 1st. Not clean? Hold the runner.'},
-         {label:'Anchor the Bag',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Ball hit to the right side? Stay near 3rd — a runner might try to sneak up.'}]},
-  {id:'LF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Field',nick:'The Left Wall',
-   jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Run hard at every ball hit your way. Charge it — the faster you arrive, the sooner runners stop.'},
-         {label:'One Target: SS',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to the shortstop relay, toward 2nd base. Never throw to 3rd. Never throw to 1st.'},
-         {label:'Back Up Third',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Ball to center field? Hustle behind 3rd base to cover a bad throw.'}]},
-  {id:'LCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Center',nick:'Gap Closer',
-   jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You cover the most ground. Lean in and take a step the moment the coach-pitcher winds up.'},
-         {label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw toward SS or 2nd — always. No other targets.'},
-         {label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or LF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
-  {id:'RCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Center',nick:'Cutoff Helper',
-   jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Best angle on the right side. Move the second the pitch is thrown — attack every ball.'},
-         {label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw to 2nd base — always. Straight line back to the infield.'},
-         {label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or RF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
-  {id:'RF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Field',nick:'Right Wall',
-   jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Run hard at every ball hit your way. Don\'t wait and watch — go get it.'},
-         {label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to 2nd base every time. Too risky to throw to 1st or 3rd from right field.'},
-         {label:'Back Up First',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Ball to the right-side infield? Shade toward 1st base in case of an overthrow your way.'}]},
+  {id:'P',badge:'#c47028',bbg:'rgba(139,69,19,.18)',name:'Pitcher',nick:'The Circle',jobs:[{label:'Be the Wall',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Stop anything hit up the middle. Get your body in front of the ball — keep it in the infield.'},{label:'Make the Throw',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Field it, look at 1st base right away, and make a clean overhand throw.'},{label:'Kill the Play',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Runners stopped? Raise your hands or run it back to the coach. Get back to your circle!'}]},
+  {id:'1B',badge:'#0d9e74',bbg:'rgba(7,110,80,.18)',name:'First Base',nick:'The Target',jobs:[{label:'Be the Target',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit anywhere else? Sprint to 1st, foot on the bag, glove up high as a big target.'},{label:'Field & Touch',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit to you? Pick it up and step on 1st yourself — no throw needed.'},{label:'Safety Net',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Stay alert for overthrows — stop the ball from rolling into the outfield.'}]},
+  {id:'2B',badge:'#1e7fd4',bbg:'rgba(19,85,160,.18)',name:'Second Base',nick:'The Bridge',jobs:[{label:'Field to First',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball hit to you? First look is 1st base. Throw it there.'},{label:'Cover the Bag',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to pitcher or shortstop? Sprint to 2nd and be ready for a throw or a tag.'},{label:'RF Relay',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to right field? Step out toward RF — catch the throw and fire to 2nd.'}]},
+  {id:'SS',badge:'#e03c14',bbg:'rgba(184,48,16,.18)',name:'Shortstop',nick:'The Vacuum',jobs:[{label:'Own the Gap',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'You are the infield leader. Everything hit between 2nd and 3rd base is yours.'},{label:'Runner on 1st?',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Look to 2nd for the force out. Underhand if close, overhand if far. Not sure? Hold it.'},{label:'LF Relay',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Ball to left field? Step out toward LF — catch the throw and fire to 2nd.'}]},
+  {id:'3B',badge:'#7040dc',bbg:'rgba(83,40,168,.18)',name:'Third Base',nick:'Hot Corner',jobs:[{label:'Stop It First',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'The Hot Corner gets rockets. Keep the ball in front of you — body block if you have to.'},{label:'The Long Throw',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Fielded clean? Big power step and fire all the way to 1st. Not clean? Hold the runner.'},{label:'Anchor the Bag',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Ball hit to the right side? Stay near 3rd — a runner might try to sneak up.'}]},
+  {id:'LF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Field',nick:'The Left Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Run hard at every ball hit your way. Charge it — the faster you arrive, the sooner runners stop.'},{label:'One Target: SS',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to the shortstop relay, toward 2nd base. Never throw to 3rd. Never throw to 1st.'},{label:'Back Up Third',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Ball to center field? Hustle behind 3rd base to cover a bad throw.'}]},
+  {id:'LCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Center',nick:'Gap Closer',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You cover the most ground. Lean in and take a step the moment the coach-pitcher winds up.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw toward SS or 2nd — always. No other targets.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or LF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
+  {id:'RCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Center',nick:'Cutoff Helper',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Best angle on the right side. Move the second the pitch is thrown — attack every ball.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw to 2nd base — always. Straight line back to the infield.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or RF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
+  {id:'RF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Field',nick:'Right Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Run hard at every ball hit your way. Don't wait and watch — go get it."},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to 2nd base every time. Too risky to throw to 1st or 3rd from right field.'},{label:'Back Up First',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Ball to the right-side infield? Shade toward 1st base in case of an overthrow your way."}]},
 ];
-
 const GOLDEN_RULES=[
   {strong:'When in doubt, hold the ball.',rest:' A held runner beats a wild throw every time.'},
   {strong:'Move on every pitch.',rest:' The moment the ball is hit, every player has a job. Move first, watch second.'},
-  {strong:'Ball always goes back to the pitcher.',rest:' Play isn\'t over until the pitcher has the ball in the circle.'},
+  {strong:'Ball always goes back to the pitcher.',rest:" Play isn't over until the pitcher has the ball in the circle."},
 ];
 
 function buildGuide(){
   const sec=document.getElementById('guideSection');
-
-  // Header
   const hdr=document.createElement('div'); hdr.className='guide-hdr';
   hdr.innerHTML='<div class="guide-hdr-line"></div><div class="guide-hdr-text">📋 Position Guide</div><div class="guide-hdr-line"></div>';
   sec.appendChild(hdr);
-
-  // Golden Rules box — above position cards
   const gr=document.createElement('div'); gr.className='golden-rules';
   const grh=document.createElement('div'); grh.className='golden-rules-head';
   grh.innerHTML='<span class="golden-rules-icon">⭐</span><span class="golden-rules-title">Golden Rules for Every Position</span>';
@@ -791,56 +587,40 @@ function buildGuide(){
     txt.innerHTML=`<strong>${r.strong}</strong>${r.rest}`;
     row.appendChild(dot); row.appendChild(txt); grb.appendChild(row);
   });
-  gr.appendChild(grb);
-  sec.appendChild(gr);
-
-  // Infield
+  gr.appendChild(grb); sec.appendChild(gr);
   const iL=document.createElement('div'); iL.className='guide-group-label'; iL.textContent='Infield Positions'; sec.appendChild(iL);
   GUIDE.slice(0,5).forEach(p=>sec.appendChild(makeCard(p)));
-
-  // Outfield
   const oL=document.createElement('div'); oL.className='guide-group-label'; oL.style.marginTop='6px'; oL.textContent='Outfield Positions'; sec.appendChild(oL);
   GUIDE.slice(5).forEach(p=>sec.appendChild(makeCard(p)));
-
   const foot=document.createElement('div'); foot.className='guide-footer'; sec.appendChild(foot);
 }
 
 function makeCard(p){
-  const card=document.createElement('div');
-  card.className='pos-card'; card.style.borderLeft=`3px solid ${p.badge}`;
+  const card=document.createElement('div'); card.className='pos-card'; card.style.borderLeft=`3px solid ${p.badge}`;
   const head=document.createElement('div'); head.className='pos-card-head';
-  const badge=document.createElement('span'); badge.className='pos-badge'; badge.textContent=p.id;
-  badge.style.cssText=`background:${p.bbg};color:${p.badge};`;
+  const badge=document.createElement('span'); badge.className='pos-badge'; badge.textContent=p.id; badge.style.cssText=`background:${p.bbg};color:${p.badge};`;
   const name=document.createElement('span'); name.className='pos-name'; name.textContent=p.name;
   const nick=document.createElement('span'); nick.className='pos-nick'; nick.textContent=p.nick;
   head.appendChild(badge); head.appendChild(name); head.appendChild(nick); card.appendChild(head);
   const ul=document.createElement('ul'); ul.className='pos-jobs';
   p.jobs.forEach(j=>{
     const li=document.createElement('li'); li.className='pos-job';
-    const lbl=document.createElement('span'); lbl.className='pos-job-label'; lbl.textContent=j.label;
-    lbl.style.cssText=`background:${j.lc};color:${j.lcolor};`;
+    const lbl=document.createElement('span'); lbl.className='pos-job-label'; lbl.textContent=j.label; lbl.style.cssText=`background:${j.lc};color:${j.lcolor};`;
     const txt=document.createElement('span'); txt.className='pos-job-text'; txt.textContent=j.text;
     li.appendChild(lbl); li.appendChild(txt); ul.appendChild(li);
   });
   card.appendChild(ul); return card;
 }
 
-// ═══════════════════════════════════════════
-//  RESIZE
-// ═══════════════════════════════════════════
 window.addEventListener('resize',()=>{
   if(!fieldOuter)return;
   scale=(fieldOuter.clientWidth||440)/DS_W;
   fieldOuter.style.height=(DS_H*scale)+'px';
   resetPlayers(true);
   if(currentSc>=0&&SCENARIOS[currentSc].runner){
-    setTimeout(()=>{runnerEl.style.display='flex';runnerEl.style.left=(PT.b1.x*scale)+'px';runnerEl.style.top=(PT.b1.y*scale)+'px';},55);
+    setTimeout(()=>placeRunner(SCENARIOS[currentSc]),55);
   }
 });
-
-// ═══════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',()=>{buildField();buildGuide();});
 </script>
 </body>
