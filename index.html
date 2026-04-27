@@ -318,13 +318,13 @@ const SCENARIOS=[
    moves:{P:{x:198,y:415},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:90,y:258},'3B':{x:60,y:300},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
    spotlight:{P:'Drift toward home plate — if the runner beats 3B, YOU are the last stop before she scores!','1B':'Stay at 1st base. Hold your spot.','2B':'Cover 2nd bag — the runner has left it, lock it down.',SS:'Back up 3rd — if the throw is wild, you stop the runner from scoring!','3B':'HOLD THE BAG! Catch the throw from LF and make the tag — do not let her score!',LF:'YOUR BALL! Charge it fast and throw DIRECTLY to 3rd base — hold that runner!',LCF:'Back up LF — if she misses it, you field and throw to 3rd!',RCF:'Shift toward center. Be ready if the ball comes your way.',RF:'Hold your position and back up the right side.'}},
 
-  // 7 — Runner on 1B, Pop Up to SS, double play
-  {name:'Pop up to SS — double play!',runner:true,
+  // 7 — Runner on 1B, Pop Up to 2B, double play
+  {name:'Pop up to 2B — double play!',runner:true,
    runnerStart:PT.b1, runnerEnd:{x:318,y:238}, runnerOut:true,
-   desc:'Runner on 1st took off running. SS catches the pop up — out #1! Runner has to get back to 1st. SS fires to 1B — out #2! Double play! 1B must stay on the bag.',
-   hit:{x:168,y:215},thrower:'SS',throwTo:{x:379,y:300},relay:null,
-   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:265,y:178},SS:{x:168,y:215},'3B':{x:62,y:295},LF:{x:50,y:160},LCF:{x:170,y:70},RCF:{x:310,y:70},RF:{x:400,y:218}},
-   spotlight:{P:'Stay near the mound — be ready to receive the ball back once the double play is done.','1B':'STAY ON THE BAG! The runner left early — catch the throw for the double play! Do not move!','2B':'Cover 2nd base in case the runner tries to reach there.',SS:'YOUR BALL — catch the pop up for out #1, then fire to 1st for out #2! Double play!','3B':'Stay at 3rd base. Anchor your bag.',LF:'Hold your position. Stay alert.',LCF:'Hold position — back up the infield.',RCF:'Hold position — back up the 2nd base area.',RF:'Back up the 1st base line.'}},
+   desc:'Runner on 1st took off running. 2B catches the pop up — out #1! Runner has to get back to 1st. 2B fires to 1B — out #2! Double play! 1B must stay on the bag.',
+   hit:{x:285,y:195},thrower:'2B',throwTo:{x:379,y:300},relay:null,
+   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:285,y:195},SS:{x:222,y:148},'3B':{x:62,y:295},LF:{x:50,y:160},LCF:{x:170,y:70},RCF:{x:310,y:70},RF:{x:400,y:218}},
+   spotlight:{P:'Stay near the mound — be ready to receive the ball back once the double play is done.','1B':'STAY ON THE BAG! The runner left early — catch the throw for the double play! Do not move!','2B':'YOUR BALL — catch the pop up for out #1, then fire to 1st for out #2! Double play!',SS:'Cover 2nd base — the runner might try to reach there.','3B':'Stay at 3rd base. Anchor your bag.',LF:'Hold your position. Stay alert.',LCF:'Hold position — back up the infield.',RCF:'Hold position — back up the 2nd base area.',RF:'Back up the 1st base line.'}},
 ];
 
 // ─── STATE ──────────────────────────────────
