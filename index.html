@@ -12,18 +12,27 @@
   --col-ss:#b83010;--col-3b:#5328a8;--col-of:#2d6e10;
   --bg0:#123456;--bg1:#0e2847;--bg2:#0a1e35;--bg3:#081828;--bg4:#060f1c;
 }
-html,body{background:var(--bg0);display:flex;justify-content:center;font-family:'Nunito',system-ui,sans-serif;}
+html,body{background:var(--bg0);display:flex;justify-content:center;font-family:"Nunito",system-ui,sans-serif;}
 .app{width:100%;max-width:480px;min-height:100vh;background:var(--bg1);display:flex;flex-direction:column;}
 
-/* ── Header ─────────────────────────────────── */
+/* ── Header ── */
 .hd{background:var(--bg2);padding:12px 16px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.07);}
 .hd-title{font-size:24px;font-weight:900;color:#d4f07a;letter-spacing:-.5px;line-height:1;}
 .hd-sub{font-size:10px;color:rgba(255,255,255,.32);margin-top:2px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
 
-/* ── Field ──────────────────────────────────── */
-.field-outer{position:relative;width:100%;flex-shrink:0;background:#4a8c1c;overflow:hidden;}
+/* ── Tab Bar ── */
+.tab-bar{background:var(--bg2);display:flex;border-bottom:2px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:200;}
+.tab{flex:1;padding:11px 4px;font-family:"Nunito",sans-serif;font-size:11px;font-weight:800;
+  background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;
+  color:rgba(255,255,255,.3);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;
+  transition:color .15s,border-color .15s;-webkit-tap-highlight-color:transparent;}
+.tab.on{color:#d4f07a;border-bottom-color:#d4f07a;}
+.tab-pane{display:flex;flex-direction:column;padding-bottom:32px;}
+
+/* ── Defense field ── */
+.def-field{position:relative;width:100%;flex-shrink:0;background:#4a8c1c;overflow:hidden;}
 .player{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:'Nunito',sans-serif;font-weight:900;color:#fff;transform:translate(-50%,-50%);
+  font-family:"Nunito",sans-serif;font-weight:900;color:#fff;transform:translate(-50%,-50%);
   z-index:10;border:2.5px solid rgba(255,255,255,.4);pointer-events:none;
   text-shadow:0 1px 2px rgba(0,0,0,.4);transition-property:left,top,box-shadow,opacity;
   transition-timing-function:cubic-bezier(.34,1.35,.64,1),cubic-bezier(.34,1.35,.64,1),ease,ease;
@@ -34,29 +43,44 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .player.spotlight.has-ball{animation:none;}
 @keyframes spotpulse{
   0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 16px 5px rgba(255,255,255,.25);}
-  50%    {box-shadow:0 0 0 8px rgba(255,255,255,.25),0 0 28px 12px rgba(255,255,255,.08);}
+  50%{box-shadow:0 0 0 8px rgba(255,255,255,.25),0 0 28px 12px rgba(255,255,255,.08);}
 }
-.runner{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:'Nunito',sans-serif;font-weight:900;color:#fff;transform:translate(-50%,-50%);
+.def-runner{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:"Nunito",sans-serif;font-weight:900;color:#fff;transform:translate(-50%,-50%);
   z-index:9;border:2.5px dashed rgba(255,255,255,.7);pointer-events:none;font-size:8px;display:none;}
-.ball{position:absolute;border-radius:50%;background:#fffef0;border:2.5px solid #c88010;
-  transform:translate(-50%,-50%);z-index:22;pointer-events:none;display:none;
-  box-shadow:0 1px 4px rgba(0,0,0,.3);}
+.def-ball{position:absolute;border-radius:50%;background:#fffef0;border:2.5px solid #c88010;
+  transform:translate(-50%,-50%);z-index:22;pointer-events:none;display:none;box-shadow:0 1px 4px rgba(0,0,0,.3);}
 
-/* ── Play button ────────────────────────────── */
+/* ── BR field ── */
+.br-field{position:relative;width:100%;height:0;padding-bottom:111.36%;overflow:hidden;background:#4a8c1c;flex-shrink:0;}
+.br-runner,.br-coach,.br-ball,.br-signal{position:absolute;}
+.br-runner{border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:"Nunito",sans-serif;font-weight:900;color:#1a1a1a;transform:translate(-50%,-50%);
+  z-index:10;border:2.5px solid rgba(255,255,255,.6);pointer-events:none;
+  transition-property:left,top,opacity;
+  transition-timing-function:cubic-bezier(.34,1.35,.64,1),cubic-bezier(.34,1.35,.64,1),ease;
+  transition-duration:.95s,.95s,.4s;}
+.br-runner.scored{opacity:0;}
+.br-coach{border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-family:"Nunito",sans-serif;font-weight:900;color:rgba(255,255,255,.6);transform:translate(-50%,-50%);
+  z-index:8;pointer-events:none;font-size:7px;background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.18);text-align:center;line-height:1.2;}
+.br-ball{border-radius:50%;background:#fffef0;border:2.5px solid #c88010;transform:translate(-50%,-50%);
+  z-index:22;pointer-events:none;display:none;box-shadow:0 1px 4px rgba(0,0,0,.3);width:3.6%;aspect-ratio:1;}
+.br-signal{transform:translate(-50%,0);z-index:25;pointer-events:none;display:none;
+  border-radius:6px;padding:4px 9px;font-size:10px;font-weight:900;font-family:"Nunito",sans-serif;
+  white-space:nowrap;border:1.5px solid rgba(255,255,255,.25);}
+
+/* ── Shared play button + info + controls ── */
 .play-wrap{background:var(--bg2);padding:8px 10px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
-.play-btn{display:block;width:100%;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;
+.play-btn{display:block;width:100%;font-family:"Nunito",sans-serif;font-size:17px;font-weight:900;
   padding:13px;border-radius:10px;border:none;background:#5fad26;color:#fff;cursor:pointer;
   letter-spacing:.02em;transition:background .13s,transform .1s;-webkit-tap-highlight-color:transparent;}
-.play-btn:hover{background:#4a8c1c;}
-.play-btn:active{transform:scale(.98);}
+.play-btn:hover{background:#4a8c1c;}.play-btn:active{transform:scale(.98);}
 .play-btn:disabled{background:rgba(255,255,255,.07);color:rgba(255,255,255,.18);cursor:default;transform:none;}
-
-/* ── Info card ──────────────────────────────── */
 .info{background:var(--bg2);padding:11px 14px 12px;border-bottom:1px solid rgba(255,255,255,.05);min-height:72px;}
 .phase-bar{display:none;gap:5px;margin-bottom:6px;}
 .phase-pip{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.08);transition:background .3s;}
-.phase-pip.lit{background:#7dc837;}
 .info-name{font-size:14px;font-weight:900;color:#d4f07a;margin-bottom:3px;line-height:1.2;}
 .info-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.55;}
 .spot-callout{display:none;margin-top:10px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
@@ -65,53 +89,61 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .spot-callout-pos{font-size:11px;font-weight:900;letter-spacing:.03em;}
 .spot-callout-body{padding:6px 10px 9px;background:rgba(0,0,0,.2);}
 .spot-callout-text{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.75);line-height:1.5;}
+.ctrl-panel{background:var(--bg3);padding:9px 10px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
+.ctrl-row{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.ctrl-row:last-child{margin-bottom:0;}
+.ctrl-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;min-width:52px;}
+.speed-btns{display:flex;gap:4px;}
+.speed-btn{font-family:"Nunito",sans-serif;font-size:10px;font-weight:800;padding:5px 9px;border-radius:20px;
+  border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.38);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .13s,color .13s,border-color .13s;}
+.speed-btn:hover{background:rgba(255,255,255,.09);}
 
-/* ── Scenario selector ──────────────────────── */
+/* ── Defense scenario buttons ── */
 .sc-wrap{background:var(--bg2);padding:9px 10px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
 .sc-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
 .sc-label-runners{margin-top:8px;color:rgba(255,140,0,.5);}
 .sc-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 0;}
 .sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
-.sc-btn{font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;padding:7px 3px 6px;border-radius:8px;
+.sc-btn{font-family:"Nunito",sans-serif;font-size:10px;font-weight:800;padding:7px 3px 6px;border-radius:8px;
   border:1.5px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.38);
-  cursor:pointer;text-align:center;line-height:1.35;transition:background .13s,border-color .13s,color .13s;
-  -webkit-tap-highlight-color:transparent;}
+  cursor:pointer;text-align:center;line-height:1.35;-webkit-tap-highlight-color:transparent;
+  transition:background .13s,border-color .13s,color .13s;}
 .sc-btn:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.65);}
-.sc-btn.on{background:rgba(93,173,38,.18);border-color:#7dc837;color:#d4f07a;}
 .sc-btn .icon{font-size:13px;display:block;margin-bottom:1px;line-height:1;}
 .sc-runner{border-color:rgba(255,140,0,.28);background:rgba(255,140,0,.05);}
 .sc-runner.on{background:rgba(255,140,0,.15);border-color:#ff8c00;color:#ffcf80;}
-
-/* ── Controls panel ─────────────────────────── */
-.ctrl-panel{background:var(--bg3);padding:9px 10px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
-.ctrl-row{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
-.ctrl-row:last-child{margin-bottom:0;}
-.ctrl-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.28);text-transform:uppercase;
-  letter-spacing:.05em;white-space:nowrap;min-width:52px;}
-.speed-btns{display:flex;gap:4px;}
-.speed-btn{font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;padding:5px 9px;
-  border-radius:20px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
-  color:rgba(255,255,255,.38);cursor:pointer;transition:background .13s,color .13s,border-color .13s;
-  -webkit-tap-highlight-color:transparent;}
-.speed-btn:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.65);}
-.speed-btn.on{background:rgba(93,180,32,.15);border-color:#6db420;color:#bce060;}
+.def-speed-btn.on{background:rgba(93,180,32,.15);border-color:#6db420;color:#bce060;}
 .spot-grid{display:flex;flex-wrap:wrap;gap:4px;}
-.spot-btn{font-family:'Nunito',sans-serif;font-size:10px;font-weight:900;padding:4px 8px;
-  border-radius:20px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
-  color:rgba(255,255,255,.38);cursor:pointer;transition:background .13s,color .13s,border-color .13s;
-  -webkit-tap-highlight-color:transparent;}
+.spot-btn{font-family:"Nunito",sans-serif;font-size:10px;font-weight:900;padding:4px 8px;border-radius:20px;
+  border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.38);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .13s,color .13s,border-color .13s;}
 .spot-btn:hover{background:rgba(255,255,255,.09);}
 .spot-btn.on{font-size:11px;}
 .spot-clear{color:rgba(255,255,255,.22);}
 .spot-clear.on{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.5);}
 
-/* ── Legend ─────────────────────────────────── */
+/* ── BR scenario buttons ── */
+.br-sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+.br-sc-btn{font-family:"Nunito",sans-serif;font-size:9px;font-weight:800;padding:7px 3px 6px;border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.38);
+  cursor:pointer;text-align:center;line-height:1.35;-webkit-tap-highlight-color:transparent;
+  transition:background .13s,border-color .13s,color .13s;}
+.br-sc-btn:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.65);}
+.br-sc-btn.on{background:rgba(255,217,122,.15);border-color:#ffd97a;color:#ffd97a;}
+.br-sc-btn .icon{font-size:12px;display:block;margin-bottom:1px;line-height:1;}
+.br-speed-btn.on{background:rgba(255,217,122,.12);border-color:#c8a820;color:#ffd97a;}
+
+/* ── Legend ── */
 .legend{background:var(--bg4);padding:9px 14px 12px;display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;}
 .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.32);font-weight:700;}
 .leg-dot{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);flex-shrink:0;}
 .leg-run{width:11px;height:11px;border-radius:50%;border:2px dashed rgba(255,140,0,.7);background:rgba(255,140,0,.3);flex-shrink:0;}
+.leg-brrun{width:11px;height:11px;border-radius:50%;background:#e8a820;border:1.5px solid rgba(255,255,255,.4);flex-shrink:0;}
+.leg-coach{width:11px;height:8px;border-radius:2px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;}
+.leg-ball{width:11px;height:11px;border-radius:50%;background:#fffef0;border:1.5px solid #c88010;flex-shrink:0;}
 
-/* ── Position Guide ─────────────────────────── */
+/* ── Shared guide / card styles ── */
 .guide-section{background:var(--bg4);padding:0;}
 .guide-hdr{padding:14px 14px 9px;display:flex;align-items:center;gap:8px;border-top:2px solid rgba(255,255,255,.05);}
 .guide-hdr-line{flex:1;height:1px;background:rgba(255,255,255,.06);}
@@ -138,6 +170,65 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
 .pos-job-label{font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:1px;letter-spacing:.03em;}
 .pos-job-text{font-size:12px;color:rgba(255,255,255,.42);line-height:1.5;}
 .guide-footer{padding:10px 14px 28px;}
+.sec{padding:14px 12px 0;}
+.sec-hdr{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.sec-hdr-line{flex:1;height:1px;background:rgba(255,255,255,.07);}
+.sec-hdr-text{font-size:10px;font-weight:800;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
+.sec-hdr-icon{font-size:15px;line-height:1;}
+.card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.card-head{padding:9px 13px 8px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.05);}
+.card-title{font-size:14px;font-weight:800;color:#ffd97a;line-height:1.2;flex:1;}
+.card-body{padding:8px 13px 11px;}
+.rule{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start;}
+.rule:last-child{border-bottom:none;padding-bottom:0;}
+.rule-lbl{font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:1px;letter-spacing:.03em;white-space:nowrap;}
+.rule-txt{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5;}
+.rule-txt strong{color:rgba(255,255,255,.82);font-weight:700;}
+.sc-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.sc-card-head{padding:9px 13px 8px;display:flex;align-items:flex-start;gap:9px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sc-num{font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;letter-spacing:.03em;}
+.sc-title{font-size:13px;font-weight:800;color:rgba(255,255,255,.85);line-height:1.3;flex:1;}
+.sc-tag{font-size:9px;color:rgba(255,255,255,.25);font-weight:700;text-align:right;flex-shrink:0;line-height:1.5;padding-top:2px;}
+.sc-body{padding:8px 13px 11px;display:flex;flex-direction:column;gap:5px;}
+.sc-row{display:flex;gap:8px;align-items:flex-start;}
+.sc-lbl{font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:1px;white-space:nowrap;letter-spacing:.03em;}
+.sc-txt{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5;}
+.sc-txt strong{color:rgba(255,255,255,.82);font-weight:700;}
+.or{background:rgba(255,160,40,.18);color:#ffa028;}.or-sm{background:rgba(255,160,40,.15);color:#ffb850;}
+.bl{background:rgba(30,130,220,.2);color:#5ab4ff;}.bl-sm{background:rgba(30,130,220,.15);color:#7ac8ff;}
+.gn{background:rgba(80,180,60,.2);color:#7de060;}.gn-sm{background:rgba(80,180,60,.15);color:#9ef080;}
+.rd{background:rgba(220,60,50,.2);color:#ff6f66;}.rd-sm{background:rgba(220,60,50,.15);color:#ff9088;}
+.pu{background:rgba(150,80,220,.2);color:#c090ff;}.pu-sm{background:rgba(150,80,220,.15);color:#d0a8ff;}
+.tl{background:rgba(20,180,150,.2);color:#40e8c8;}.tl-sm{background:rgba(20,180,150,.15);color:#70f0d8;}
+.gd{background:rgba(220,180,20,.2);color:#ffd040;}.gd-sm{background:rgba(220,180,20,.15);color:#ffe070;}
+.pk{background:rgba(220,60,140,.2);color:#ff80c8;}.pk-sm{background:rgba(220,60,140,.15);color:#ff9fd4;}
+
+/* ── Batting flip cards ── */
+.flip-stack{display:flex;flex-direction:column;gap:10px;}
+.flip{perspective:900px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.flip-inner{display:grid;transition:transform .55s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.flip.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;}
+.flip-back{transform:rotateY(180deg);}
+.fc-front{background:var(--bg2);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;}
+.fc-top{padding:8px 14px 7px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.05);}
+.fc-num{font-size:10px;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.07em;}
+.fc-outs{display:flex;gap:5px;align-items:center;}
+.fc-pip{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);}
+.fc-pip.out{background:#ff7060;border-color:#ff7060;}
+.fc-field{width:100%;display:block;flex-shrink:0;}
+.fc-bot{padding:10px 14px 13px;border-top:1px solid rgba(255,255,255,.05);}
+.fc-name{font-size:15px;font-weight:900;color:rgba(255,255,255,.9);line-height:1.25;margin-bottom:3px;}
+.fc-tap{font-size:9px;color:rgba(255,255,255,.2);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.fc-out-txt{font-size:10px;color:rgba(255,255,255,.3);font-weight:700;margin-left:2px;}
+.fc-back{background:var(--bg3);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;padding:16px 14px 20px;gap:10px;}
+.fc-back-title{font-size:15px;font-weight:900;color:#ffd97a;line-height:1.2;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07);}
+.fc-back-rules{display:flex;flex-direction:column;gap:7px;}
+.fc-back-row{display:flex;gap:9px;align-items:flex-start;}
+.fc-back-lbl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;flex-shrink:0;margin-top:1px;background:rgba(255,217,122,.1);color:rgba(255,217,122,.7);letter-spacing:.03em;}
+.fc-back-txt{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.55;}
+.fc-back-txt strong{color:rgba(255,255,255,.85);font-weight:700;}
+.fc-return{font-size:9px;color:rgba(255,255,255,.12);font-weight:700;text-transform:uppercase;letter-spacing:.05em;text-align:center;padding-top:12px;margin-top:4px;}
 </style>
 </head>
 <body>
@@ -148,81 +239,79 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
   <div class="hd-sub">8U Softball &nbsp;&middot;&nbsp; DYS Coach-Pitch &nbsp;&middot;&nbsp; Sweet Belles</div>
 </div>
 
-<div class="field-outer" id="fieldOuter"></div>
+<div class="tab-bar">
+  <button class="tab on"  onclick="switchTab('def')">&#9876; Defense</button>
+  <button class="tab"     onclick="switchTab('br')">&#127939; Base Running</button>
+  <button class="tab"     onclick="switchTab('bat')">&#9898; Batting</button>
+</div>
 
-<!-- PLAY BUTTON -->
+<!-- ═══════════════════════════════════════════
+     DEFENSE TAB
+═══════════════════════════════════════════ -->
+<div id="tab-def" class="tab-pane">
+
+<div class="def-field" id="def-fieldOuter"></div>
+
 <div class="play-wrap">
-  <button class="play-btn" id="playBtn" onclick="doPlay()" disabled>&#9654;&nbsp; Play</button>
+  <button class="play-btn" id="def-playBtn" onclick="DEF.doPlay()" disabled>&#9654;&nbsp; Play</button>
 </div>
-
-<!-- INFO CARD -->
-<div class="info" id="infoBox">
-  <div class="phase-bar" id="phaseBar">
-    <div class="phase-pip" id="pp0"></div>
-    <div class="phase-pip" id="pp1"></div>
-    <div class="phase-pip" id="pp2"></div>
-    <div class="phase-pip" id="pp3"></div>
+<div class="info">
+  <div class="phase-bar" id="def-phaseBar" style="display:flex;gap:5px;margin-bottom:6px;">
+    <div class="phase-pip" id="def-pp0"></div><div class="phase-pip" id="def-pp1"></div>
+    <div class="phase-pip" id="def-pp2"></div><div class="phase-pip" id="def-pp3"></div>
   </div>
-  <div class="info-name" id="infoName">Pick a play below &darr;</div>
-  <div class="info-desc" id="infoDesc">Select a play, then press Play to see where every player needs to go.</div>
-  <div class="spot-callout" id="spotCallout">
-    <div class="spot-callout-head" id="spotCalloutHead">
-      <div class="spot-callout-dot" id="spotCalloutDot"></div>
-      <span class="spot-callout-pos" id="spotCalloutPos"></span>
+  <div class="info-name" id="def-infoName">Pick a play below &darr;</div>
+  <div class="info-desc" id="def-infoDesc">Select a play, then press Play to see where every player needs to go.</div>
+  <div class="spot-callout" id="def-spotCallout">
+    <div class="spot-callout-head" id="def-spotCalloutHead">
+      <div class="spot-callout-dot" id="def-spotCalloutDot"></div>
+      <span class="spot-callout-pos" id="def-spotCalloutPos"></span>
     </div>
-    <div class="spot-callout-body">
-      <div class="spot-callout-text" id="spotCalloutText"></div>
-    </div>
+    <div class="spot-callout-body"><div class="spot-callout-text" id="def-spotCalloutText"></div></div>
   </div>
 </div>
-
-<!-- PICK A PLAY -->
 <div class="sc-wrap">
   <div class="sc-label">Standard plays</div>
-  <div class="sc-grid" id="scGrid">
-    <button class="sc-btn" onclick="selSc(0)"><span class="icon">&#9711;</span>Ball to<br>Pitcher</button>
-    <button class="sc-btn" onclick="selSc(1)"><span class="icon">&#8592;</span>Left Side<br>(SS / 3B)</button>
-    <button class="sc-btn" onclick="selSc(2)"><span class="icon">&#8594;</span>Right Side<br>(2B / 1B)</button>
-    <button class="sc-btn" onclick="selSc(3)"><span class="icon">&#11044;</span>Ball to<br>Left Field</button>
-    <button class="sc-btn" onclick="selSc(4)"><span class="icon">&#11044;</span>Ball to<br>Right Field</button>
+  <div class="sc-grid">
+    <button class="sc-btn def-sc" onclick="DEF.selSc(0)"><span class="icon">&#9711;</span>Ball to<br>Pitcher</button>
+    <button class="sc-btn def-sc" onclick="DEF.selSc(1)"><span class="icon">&#8592;</span>Left Side<br>(SS / 3B)</button>
+    <button class="sc-btn def-sc" onclick="DEF.selSc(2)"><span class="icon">&#8594;</span>Right Side<br>(2B / 1B)</button>
+    <button class="sc-btn def-sc" onclick="DEF.selSc(3)"><span class="icon">&#11044;</span>Ball to<br>Left Field</button>
+    <button class="sc-btn def-sc" onclick="DEF.selSc(4)"><span class="icon">&#11044;</span>Ball to<br>Right Field</button>
   </div>
   <div class="sc-divider"></div>
   <div class="sc-label sc-label-runners">&#127939; Runners on base</div>
-  <div class="sc-grid" id="scGridRunners">
-    <button class="sc-btn sc-runner" onclick="selSc(5)"><span class="icon">&#8592;</span>Runner 1B<br>Left Side Hit</button>
-    <button class="sc-btn sc-runner" onclick="selSc(6)"><span class="icon">&#11044;</span>Runner 2B<br>LF → 3rd</button>
-    <button class="sc-btn sc-runner" onclick="selSc(7)"><span class="icon">&#8679;</span>Pop Up!<br>Double Play</button>
+  <div class="sc-grid">
+    <button class="sc-btn sc-runner def-sc" onclick="DEF.selSc(5)"><span class="icon">&#8592;</span>Runner 1B<br>Left Side Hit</button>
+    <button class="sc-btn sc-runner def-sc" onclick="DEF.selSc(6)"><span class="icon">&#11044;</span>Runner 2B<br>LF &rarr; 3rd</button>
+    <button class="sc-btn sc-runner def-sc" onclick="DEF.selSc(7)"><span class="icon">&#8679;</span>Pop Up!<br>Double Play</button>
   </div>
 </div>
-
-<!-- CONTROLS -->
 <div class="ctrl-panel">
   <div class="ctrl-row">
     <span class="ctrl-label">Play Speed</span>
     <div class="speed-btns">
-      <button class="speed-btn on" onclick="setSpeed(1.85,'slow')">&#128034; Slow</button>
-      <button class="speed-btn" onclick="setSpeed(1.0,'norm')">Normal</button>
-      <button class="speed-btn" onclick="setSpeed(0.52,'fast')">&#9889; Fast</button>
+      <button class="speed-btn def-speed-btn on" onclick="DEF.setSpeed(1.85,'slow')">&#128034; Slow</button>
+      <button class="speed-btn def-speed-btn"    onclick="DEF.setSpeed(1.0,'norm')">Normal</button>
+      <button class="speed-btn def-speed-btn"    onclick="DEF.setSpeed(0.52,'fast')">&#9889; Fast</button>
     </div>
   </div>
   <div class="ctrl-row" style="align-items:flex-start">
     <span class="ctrl-label" style="padding-top:4px">My Spot</span>
-    <div class="spot-grid" id="spotGrid">
-      <button class="spot-btn" data-pos="P"   onclick="setSpot('P')"  >P</button>
-      <button class="spot-btn" data-pos="1B"  onclick="setSpot('1B')" >1B</button>
-      <button class="spot-btn" data-pos="2B"  onclick="setSpot('2B')" >2B</button>
-      <button class="spot-btn" data-pos="SS"  onclick="setSpot('SS')" >SS</button>
-      <button class="spot-btn" data-pos="3B"  onclick="setSpot('3B')" >3B</button>
-      <button class="spot-btn" data-pos="LF"  onclick="setSpot('LF')" >LF</button>
-      <button class="spot-btn" data-pos="LCF" onclick="setSpot('LCF')">LCF</button>
-      <button class="spot-btn" data-pos="RCF" onclick="setSpot('RCF')">RCF</button>
-      <button class="spot-btn" data-pos="RF"  onclick="setSpot('RF')" >RF</button>
-      <button class="spot-btn spot-clear on"  onclick="setSpot(null)"  >&#215; All</button>
+    <div class="spot-grid">
+      <button class="spot-btn" data-pos="P"   onclick="DEF.setSpot('P')">P</button>
+      <button class="spot-btn" data-pos="1B"  onclick="DEF.setSpot('1B')">1B</button>
+      <button class="spot-btn" data-pos="2B"  onclick="DEF.setSpot('2B')">2B</button>
+      <button class="spot-btn" data-pos="SS"  onclick="DEF.setSpot('SS')">SS</button>
+      <button class="spot-btn" data-pos="3B"  onclick="DEF.setSpot('3B')">3B</button>
+      <button class="spot-btn" data-pos="LF"  onclick="DEF.setSpot('LF')">LF</button>
+      <button class="spot-btn" data-pos="LCF" onclick="DEF.setSpot('LCF')">LCF</button>
+      <button class="spot-btn" data-pos="RCF" onclick="DEF.setSpot('RCF')">RCF</button>
+      <button class="spot-btn" data-pos="RF"  onclick="DEF.setSpot('RF')">RF</button>
+      <button class="spot-btn spot-clear on"  onclick="DEF.setSpot(null)">&#215; All</button>
     </div>
   </div>
 </div>
-
-<!-- LEGEND -->
 <div class="legend">
   <div class="leg"><div class="leg-dot" style="background:var(--col-p)"></div>Pitcher</div>
   <div class="leg"><div class="leg-dot" style="background:var(--col-1b)"></div>1st base</div>
@@ -232,397 +321,915 @@ html,body{background:var(--bg0);display:flex;justify-content:center;font-family:
   <div class="leg"><div class="leg-dot" style="background:var(--col-of)"></div>Outfield</div>
   <div class="leg"><div class="leg-run"></div>Runner</div>
 </div>
+<div class="guide-section" id="def-guideSection"></div>
+</div><!-- /tab-def -->
 
-<div class="guide-section" id="guideSection"></div>
+<!-- ═══════════════════════════════════════════
+     BASE RUNNING TAB
+═══════════════════════════════════════════ -->
+<div id="tab-br" class="tab-pane" style="display:none">
 
+<div class="br-field" id="br-fieldOuter"></div>
+
+<div class="play-wrap">
+  <button class="play-btn" id="br-playBtn" onclick="BR.doPlay()" disabled>&#9654;&nbsp; Play</button>
 </div>
+<div class="info">
+  <div class="phase-bar" id="br-phaseBar" style="display:flex;gap:5px;margin-bottom:6px;">
+    <div class="phase-pip" id="br-pp0"></div>
+    <div class="phase-pip" id="br-pp1"></div>
+    <div class="phase-pip" id="br-pp2"></div>
+  </div>
+  <div class="info-name" id="br-infoName">Pick a play below &darr;</div>
+  <div class="info-desc" id="br-infoDesc">Select a scenario and press Play to watch the runners move.</div>
+</div>
+<div class="sc-wrap">
+  <div class="sc-label">Pick a scenario</div>
+  <div class="br-sc-grid">
+    <button class="br-sc-btn" onclick="BR.selSc(0)"><span class="icon">&#8601;</span>3B Line<br>Hit BR-9</button>
+    <button class="br-sc-btn" onclick="BR.selSc(1)"><span class="icon">&#8680;</span>R on 1B<br>Force BR-1</button>
+    <button class="br-sc-btn" onclick="BR.selSc(2)"><span class="icon">&#8594;</span>R on 2B<br>Right BR-2</button>
+    <button class="br-sc-btn" onclick="BR.selSc(3)"><span class="icon">&#8592;</span>R on 2B<br>Left BR-2</button>
+    <button class="br-sc-btn" onclick="BR.selSc(4)"><span class="icon">&#8962;</span>R on 3B<br>Score BR-3</button>
+    <button class="br-sc-btn" onclick="BR.selSc(5)"><span class="icon">&#8679;</span>Fly Ball<br>Tag Up BR-4</button>
+    <button class="br-sc-btn" onclick="BR.selSc(6)"><span class="icon">&#11044;</span>RF Hit<br>R on 1B BR-8</button>
+    <button class="br-sc-btn" onclick="BR.selSc(7)"><span class="icon">&#11044;</span>LF Hit<br>R on 2B BR-6</button>
+  </div>
+</div>
+<div class="ctrl-panel">
+  <div class="ctrl-row">
+    <span class="ctrl-label">Play Speed</span>
+    <div class="speed-btns">
+      <button class="speed-btn br-speed-btn on" onclick="BR.setSpeed(1.85,'slow')">&#128034; Slow</button>
+      <button class="speed-btn br-speed-btn"    onclick="BR.setSpeed(1.0,'norm')">Normal</button>
+      <button class="speed-btn br-speed-btn"    onclick="BR.setSpeed(0.52,'fast')">&#9889; Fast</button>
+    </div>
+  </div>
+</div>
+<div class="legend">
+  <div class="leg"><div class="leg-brrun"></div>Runner / Batter</div>
+  <div class="leg"><div class="leg-coach"></div>Base Coach</div>
+  <div class="leg"><div class="leg-ball"></div>Ball</div>
+</div>
+
+<!-- BR Guide Cards -->
+<div class="sec">
+<div class="sec-hdr"><div class="sec-hdr-icon">&#127939;</div><div class="sec-hdr-text">Baserunning Fundamentals</div><div class="sec-hdr-line"></div></div>
+<div class="card" style="border-left:3px solid #7de060">
+  <div class="card-head"><span class="card-title">These Rules Never Change</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl gn-sm">Run Hard</span><span class="rule-txt"><strong>Always run fast.</strong> Even if you think you might get out, errors happen all the time. You are not out until called out.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Through 1st</span><span class="rule-txt">On a ground ball, <strong>run fast through 1st base!</strong> Never slow down before the bag. Step on the front of the base as you cross it.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Eyes Up</span><span class="rule-txt">As you round any base, <strong>find your base coach immediately.</strong> They see things you can't. Trust them.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Tag Up</span><span class="rule-txt">Fly Ball or Pop Up? <strong>Get back to your base and wait.</strong> Tag and go if it's caught. Run if it drops.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Go Home</span><span class="rule-txt">If the coach sends you home &mdash; <strong>do not stop.</strong> Run all the way through the plate.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Picture It</span><span class="rule-txt">Before the pitch, ask yourself: <strong>"If the ball is hit here, I go here."</strong></span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Stay Ready</span><span class="rule-txt">On your toes, alert and ready. <strong>The play is not over until the pitcher has the ball in the circle.</strong></span></div>
+  </div>
+</div>
+<div class="card" style="border-left:3px solid #7de060">
+  <div class="card-head"><span class="card-title">Stay Smart</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl gn-sm">Know the Outs</span><span class="rule-txt">Before every pitch, <strong>know how many outs there are.</strong> 0 or 1 outs: be careful, tag up on fly balls. 2 outs: run hard on the hit.</span></div>
+    <div class="rule"><span class="rule-lbl gn-sm">Know the Score</span><span class="rule-txt">Behind? <strong>Be aggressive.</strong> Winning by a lot? <strong>Be smart</strong> and don't give away outs on the bases.</span></div>
+  </div>
+</div>
+<div class="card" style="border-left:3px solid #40e8c8">
+  <div class="card-head"><span class="card-title">Force Out vs. Tag Out &mdash; Know the Difference</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl tl-sm">Am I Forced?</span><span class="rule-txt">Simple check: <strong>is there a runner on every base behind me?</strong> If yes, you are forced to run. If no, you can make a decision.</span></div>
+    <div class="rule"><span class="rule-lbl tl-sm">Force Out</span><span class="rule-txt"><strong>You MUST run.</strong> The defense just needs to get the ball to your base before you. Run hard.</span></div>
+    <div class="rule"><span class="rule-lbl tl-sm">Tag Out</span><span class="rule-txt">Not forced? The defense has to physically tag you. <strong>You can stay, go, or make them chase you.</strong></span></div>
+    <div class="rule"><span class="rule-lbl tl-sm">Tag Tip</span><span class="rule-txt"><strong>Don't run into the glove.</strong> Stop short, fake them out, force a rundown. Errors happen.</span></div>
+  </div>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-hdr"><div class="sec-hdr-icon">&#127919;</div><div class="sec-hdr-text">Base Coach Signals</div><div class="sec-hdr-line"></div></div>
+<div class="card" style="border-left:3px solid #5ab4ff">
+  <div class="card-head"><span class="card-title">1B &mdash; First Base Coach Signals</span><span style="font-size:9px;color:rgba(255,255,255,.28);font-weight:700;">Run through<br>or keep going</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl bl-sm">&#9995; Stop at 1B</span><span class="rule-txt"><strong>Run through the bag.</strong> Turn toward foul territory and return to 1st. Turning toward 2nd risks a tag out.</span></div>
+    <div class="rule"><span class="rule-lbl bl-sm">&#128260; Keep Going</span><span class="rule-txt"><strong>Ball hit hard to outfield? Round the bag toward 2nd.</strong> Look to the 3B coach on your way.</span></div>
+    <div class="rule"><span class="rule-lbl bl-sm">&#128070; Back</span><span class="rule-txt"><strong>Too risky? Get back to 1st immediately.</strong> Don't give them an easy out.</span></div>
+  </div>
+</div>
+<div class="card" style="border-left:3px solid #ffa028">
+  <div class="card-head"><span class="card-title">3B &mdash; Third Base Coach Signals</span><span style="font-size:9px;color:rgba(255,255,255,.28);font-weight:700;">This coach<br>is your eyes!</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl or-sm">&#128064; Look!</span><span class="rule-txt"><strong>Find 3B Coach with your eyes.</strong> Running from 1st to 2nd? Look to 3B Coach for stop or go.</span></div>
+    <div class="rule"><span class="rule-lbl or-sm">&#128588; Hands Up</span><span class="rule-txt"><strong>STOP at 2nd or 3rd.</strong> Plant your foot on the bag. Do not go to next base.</span></div>
+    <div class="rule"><span class="rule-lbl or-sm">&#127744; Windmill</span><span class="rule-txt"><strong>GO GO GO &mdash; no stopping.</strong> Head down, run as fast as you can. Run Run Run.</span></div>
+    <div class="rule"><span class="rule-lbl or-sm">&#128071; Pointing</span><span class="rule-txt"><strong>Prepare for a close play. Get there. Slide.</strong> Get low, get safe, stay on the bag.</span></div>
+  </div>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-hdr"><div class="sec-hdr-icon">&#128161;</div><div class="sec-hdr-text">Baserunning Scenarios</div><div class="sec-hdr-line"></div></div>
+<div class="sc-card" style="border-left:3px solid #7de060">
+  <div class="sc-card-head"><span class="sc-num gn">BR-1</span><span class="sc-title">Runner on 1B &mdash; Ground Ball &mdash; Force!</span><span class="sc-tag">0 or 1 outs</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl gn-sm">Runner 1B</span><span class="sc-txt"><strong>Run hard to 2nd.</strong> Don't stop to watch the play.</span></div>
+    <div class="sc-row"><span class="sc-lbl gn-sm">Batter</span><span class="sc-txt"><strong>Run through 1st.</strong> Run hard even if the 1B fields it clean.</span></div>
+    <div class="sc-row"><span class="sc-lbl gn-sm">Forced Runners</span><span class="sc-txt">If forced from 2nd or 3rd &mdash; don't stop to watch. <strong>Run hard to next base or home.</strong></span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #7de060">
+  <div class="sc-card-head"><span class="sc-num gn">BR-2</span><span class="sc-title">Runner on 2B &mdash; Ground Ball &mdash; Read!</span><span class="sc-tag">0 or 1 outs</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl gn-sm">Right Side Hit</span><span class="sc-txt"><strong>Right side (2B or 1B) &rarr; GO!</strong> Watch the 3B coach. Usually waved home when ball is thrown to 1st.</span></div>
+    <div class="sc-row"><span class="sc-lbl gn-sm">Left Side Hit</span><span class="sc-txt"><strong>Left side (SS or 3B) &rarr; wait and read.</strong> They may throw to 3rd. Watch the 3B coach.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #7de060">
+  <div class="sc-card-head"><span class="sc-num gn">BR-3</span><span class="sc-title">Runner on 3B &mdash; Ground Ball &mdash; Go Home!</span><span class="sc-tag">0 or 1 outs</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl gn-sm">Runner 3B</span><span class="sc-txt">Watch the ball hit the ground, then <strong>go on the coach's signal.</strong> Throw to 1st is your green light home.</span></div>
+    <div class="sc-row"><span class="sc-lbl gn-sm">2 Outs</span><span class="sc-txt">With 2 outs, <strong>run on almost ANY contact.</strong> The inning ends if the batter is out anyway.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #40e8c8">
+  <div class="sc-card-head"><span class="sc-num tl">BR-4</span><span class="sc-title">Fly Ball &mdash; Less Than 2 Outs</span><span class="sc-tag">Tag up!</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl tl-sm">All Runners</span><span class="sc-txt"><strong>Get back to your base and freeze.</strong> Caught &rarr; tag then decide. Dropped &rarr; run immediately.</span></div>
+    <div class="sc-row"><span class="sc-lbl tl-sm">Runner 3B</span><span class="sc-txt">Deep fly ball caught? <strong>Tag up and go home.</strong> The outfield throw is long &mdash; you can score.</span></div>
+    <div class="sc-row"><span class="sc-lbl tl-sm">Shallow Fly</span><span class="sc-txt">Caught close to infield? <strong>Get back and stay there.</strong> Don't give an easy out.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #40e8c8">
+  <div class="sc-card-head"><span class="sc-num tl">BR-5</span><span class="sc-title">Fly Ball &mdash; 2 Outs</span><span class="sc-tag">Run on contact</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl tl-sm">All Runners</span><span class="sc-txt">With 2 outs, <strong>run the moment the ball is hit.</strong> If caught, inning ends anyway. If dropped, you're already running.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #ff6f66">
+  <div class="sc-card-head"><span class="sc-num rd">BR-6</span><span class="sc-title">Runner on 2B &mdash; Hit to Left Field</span><span class="sc-tag">Scoring chance</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl rd-sm">Runner 2B</span><span class="sc-txt"><strong>Go on contact.</strong> Round 3rd hard and watch your 3B coach for the wave home.</span></div>
+    <div class="sc-row"><span class="sc-lbl rd-sm">Watch For</span><span class="sc-txt">LF could throw to 3rd &mdash; be ready to <strong>stop or slide</strong> if the coach signals. Don't run through a tag you can't beat.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #c090ff">
+  <div class="sc-card-head"><span class="sc-num pu">BR-7</span><span class="sc-title">Infield Pop Up &mdash; All Runners</span><span class="sc-tag">Freeze!</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl pu-sm">All Runners</span><span class="sc-txt"><strong>Get back to your base and freeze.</strong> An infielder can catch and throw for a double out.</span></div>
+    <div class="sc-row"><span class="sc-lbl pu-sm">If Dropped</span><span class="sc-txt">Ball hits the ground &mdash; <strong>go immediately if forced.</strong></span></div>
+    <div class="sc-row"><span class="sc-lbl pu-sm">2 Outs</span><span class="sc-txt">With 2 outs, <strong>run the moment the ball is hit.</strong> Inning ends anyway if caught.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #ffd040">
+  <div class="sc-card-head"><span class="sc-num gd">BR-8</span><span class="sc-title">Runner on 1B &mdash; Hit to Right Field</span><span class="sc-tag">Score from 1st!</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl gd-sm">Runner 1B</span><span class="sc-txt">RF has the hardest throw home. <strong>Round 2nd hard and look at the 3B coach.</strong> A clean RF hit almost always gets you to 3rd.</span></div>
+    <div class="sc-row"><span class="sc-lbl gd-sm">Forced Runners</span><span class="sc-txt">On 2B or 3B &mdash; <strong>RUN!</strong> A clean RF hit almost always gets you home from 2B or 3B.</span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #ffd040">
+  <div class="sc-card-head"><span class="sc-num gd">BR-9</span><span class="sc-title">Hit Down the 3B Line</span><span class="sc-tag">Extra bases!</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl gd-sm">Batter</span><span class="sc-txt"><strong>This can be a double if you run hard.</strong> Look to 1B coach &mdash; round 1st and go!</span></div>
+    <div class="sc-row"><span class="sc-lbl gd-sm">Runner 1B</span><span class="sc-txt">Ball down the line gives you time. You may get to 3rd or score. <strong>Only stop if the 3B coach says stop.</strong></span></div>
+    <div class="sc-row"><span class="sc-lbl gd-sm">Runner 2B/3B</span><span class="sc-txt">A hard hit down the 3B line will usually send you home. <strong>Run hard &mdash; look to 3B coach.</strong></span></div>
+  </div>
+</div>
+<div class="sc-card" style="border-left:3px solid #ff6f66">
+  <div class="sc-card-head"><span class="sc-num rd">BR-10</span><span class="sc-title">Overthrow to 1st or 3rd</span><span class="sc-tag">Free bases!</span></div>
+  <div class="sc-body">
+    <div class="sc-row"><span class="sc-lbl rd-sm">All Runners</span><span class="sc-txt">Overthrown? <strong>Keep running &mdash; take 1 additional base.</strong> Don't stop unless the coach signals.</span></div>
+    <div class="sc-row"><span class="sc-lbl rd-sm">Stay Alert</span><span class="sc-txt">Even after reaching safely &mdash; <strong>a second overthrow can happen.</strong> Stay ready.</span></div>
+  </div>
+</div>
+</div><!-- sec -->
+</div><!-- /tab-br -->
+
+<!-- ═══════════════════════════════════════════
+     BATTING TAB
+═══════════════════════════════════════════ -->
+<div id="tab-bat" class="tab-pane" style="display:none">
+<div class="sec">
+<div class="sec-hdr"><div class="sec-hdr-icon">&#129504;</div><div class="sec-hdr-text">Smart Batting Habits</div><div class="sec-hdr-line"></div></div>
+<div class="card" style="border-left:3px solid #ff80c8">
+  <div class="card-head"><span class="card-title">Hitting FUNdamentals &mdash; Every At Bat</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl pk-sm">See It</span><span class="rule-txt"><strong>Watch the ball all the way to the bat.</strong> Not the pitcher, not the fielders &mdash; eyes on the ball the whole time.</span></div>
+    <div class="rule"><span class="rule-lbl pk-sm">Swing Fast</span><span class="rule-txt">Your job is to <strong>hit the ball somewhere.</strong> Hard contact anywhere creates opportunities.</span></div>
+    <div class="rule"><span class="rule-lbl pk-sm">After Contact</span><span class="rule-txt"><strong>Drop the bat and sprint immediately.</strong> Don't flip it, don't watch. First base is 60 feet &mdash; run.</span></div>
+    <div class="rule"><span class="rule-lbl pk-sm">Look to 1B Coach</span><span class="rule-txt">The moment you run toward 1st, <strong>look to 1B Coach.</strong> Run through or head to 2nd.</span></div>
+    <div class="rule"><span class="rule-lbl pk-sm">2 Strikes</span><span class="rule-txt">Reset, breathe. <strong>See the ball, trust your hands, and swing.</strong> A groundball anywhere beats a strikeout.</span></div>
+    <div class="rule"><span class="rule-lbl pk-sm">Strike Out?</span><span class="rule-txt">Even the best strike out. <strong>Keep swinging, have fun, try your best.</strong> You'll get it next time.</span></div>
+  </div>
+</div>
+<div class="card" style="border-left:3px solid #40e8c8">
+  <div class="card-head"><span class="card-title">Next Level Batting</span></div>
+  <div class="card-body">
+    <div class="rule"><span class="rule-lbl tl-sm">Know the Count</span><span class="rule-txt">0&ndash;1 strikes: be selective. <strong>2 strikes: protect the plate &mdash; shorten your swing and put the ball in play.</strong></span></div>
+    <div class="rule"><span class="rule-lbl tl-sm">Know the Runners</span><span class="rule-txt">Before you step in, <strong>know where every runner is.</strong> A hit to the right spot could drive in a run.</span></div>
+  </div>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-hdr"><div class="sec-hdr-icon">&#9898;</div><div class="sec-hdr-text">Batting Situations</div><div class="sec-hdr-line"></div></div>
+<div class="flip-stack">
+
+<div class="flip" onclick="this.classList.toggle('flipped')">
+<div class="flip-inner">
+  <div class="flip-front fc-front" style="border-left:3px solid rgba(255,255,255,.12);">
+    <div class="fc-top"><span class="fc-num">BAT-1</span><div class="fc-outs"><div class="fc-pip"></div><div class="fc-pip"></div><span class="fc-out-txt">0 or 1 outs</span></div></div>
+    <svg class="fc-field" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="440" height="210" fill="#3a7a22"/><polygon points="220,195 305,120 220,45 135,120" fill="#c49040" opacity=".5"/><line x1="220" y1="210" x2="440" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="210" x2="0" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="195" x2="305" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="305" y1="120" x2="220" y2="45" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="220" y1="45" x2="135" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="135" y1="120" x2="220" y2="195" stroke="rgba(255,255,255,.5)" stroke-width="2"/><rect x="213" y="188" width="14" height="14" fill="white" transform="rotate(45,220,195)"/><rect x="298" y="113" width="13" height="13" fill="white" transform="rotate(45,305,120)"/><rect x="213" y="38" width="13" height="13" fill="white" transform="rotate(45,220,45)"/><rect x="128" y="113" width="13" height="13" fill="white" transform="rotate(45,135,120)"/><circle cx="135" cy="120" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="135" y="125" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><text x="220" y="207" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">Home</text><text x="323" y="124" text-anchor="start" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">1B</text><text x="220" y="34" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">2B</text><text x="112" y="124" text-anchor="end" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">3B</text></svg>
+    <div class="fc-bot"><div class="fc-name">Runner on 2nd or 3rd</div><div class="fc-tap">Tap for your move &rarr;</div></div>
+  </div>
+  <div class="flip-back fc-back">
+    <div class="fc-back-title">Drive her in &mdash; hit the right side</div>
+    <div class="fc-back-rules">
+      <div class="fc-back-row"><span class="fc-back-lbl">Goal</span><span class="fc-back-txt"><strong>Hit the ball toward 1B or 2B.</strong> Even a slow roller to that side scores the runner from 3rd.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Why?</span><span class="fc-back-txt"><strong>Right side hits buy the runner more time.</strong> A left side hit (SS, 3B, P) is a shorter, faster throw.</span></div>
+    </div>
+    <div class="fc-return">Tap to flip back</div>
+  </div>
+</div>
+</div>
+
+<div class="flip" onclick="this.classList.toggle('flipped')">
+<div class="flip-inner">
+  <div class="flip-front fc-front" style="border-left:3px solid rgba(255,255,255,.12);">
+    <div class="fc-top"><span class="fc-num">BAT-2</span><div class="fc-outs"><div class="fc-pip"></div><div class="fc-pip"></div><span class="fc-out-txt">0 or 1 outs</span></div></div>
+    <svg class="fc-field" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="440" height="210" fill="#3a7a22"/><polygon points="220,195 305,120 220,45 135,120" fill="#c49040" opacity=".5"/><line x1="220" y1="210" x2="440" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="210" x2="0" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="195" x2="305" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="305" y1="120" x2="220" y2="45" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="220" y1="45" x2="135" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="135" y1="120" x2="220" y2="195" stroke="rgba(255,255,255,.5)" stroke-width="2"/><rect x="213" y="188" width="14" height="14" fill="white" transform="rotate(45,220,195)"/><rect x="298" y="113" width="13" height="13" fill="white" transform="rotate(45,305,120)"/><rect x="213" y="38" width="13" height="13" fill="white" transform="rotate(45,220,45)"/><rect x="128" y="113" width="13" height="13" fill="white" transform="rotate(45,135,120)"/><circle cx="135" cy="120" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="135" y="125" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><circle cx="220" cy="163" r="5" fill="rgba(255,255,255,.28)"/><circle cx="252" cy="155" r="5" fill="rgba(255,255,255,.28)"/><circle cx="188" cy="155" r="5" fill="rgba(255,255,255,.28)"/><text x="220" y="180" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.35)" font-family="Nunito,sans-serif" font-weight="700">INFIELD IN</text><text x="323" y="124" text-anchor="start" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">1B</text><text x="220" y="34" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">2B</text><text x="112" y="124" text-anchor="end" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">3B</text></svg>
+    <div class="fc-bot"><div class="fc-name">Runner on 3rd, infield playing in</div><div class="fc-tap">Tap for your move &rarr;</div></div>
+  </div>
+  <div class="flip-back fc-back">
+    <div class="fc-back-title">Hit it hard &mdash; get it past them</div>
+    <div class="fc-back-rules">
+      <div class="fc-back-row"><span class="fc-back-lbl">Goal</span><span class="fc-back-txt"><strong>A ball past a shallow infielder almost always scores the runner.</strong> Hard contact &mdash; don't try to be perfect.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Sacrifice</span><span class="fc-back-txt">A hit to the right <strong>forces the defense to make a play on you at 1B</strong> &mdash; and the runner at 3rd scores.</span></div>
+    </div>
+    <div class="fc-return">Tap to flip back</div>
+  </div>
+</div>
+</div>
+
+<div class="flip" onclick="this.classList.toggle('flipped')">
+<div class="flip-inner">
+  <div class="flip-front fc-front" style="border-left:3px solid rgba(255,255,255,.12);">
+    <div class="fc-top"><span class="fc-num">BAT-3</span><div class="fc-outs"><div class="fc-pip"></div><div class="fc-pip"></div><span class="fc-out-txt">0 or 1 outs</span></div></div>
+    <svg class="fc-field" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="440" height="210" fill="#3a7a22"/><polygon points="220,195 305,120 220,45 135,120" fill="#c49040" opacity=".5"/><line x1="220" y1="210" x2="440" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="210" x2="0" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="195" x2="305" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="305" y1="120" x2="220" y2="45" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="220" y1="45" x2="135" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="135" y1="120" x2="220" y2="195" stroke="rgba(255,255,255,.5)" stroke-width="2"/><rect x="213" y="188" width="14" height="14" fill="white" transform="rotate(45,220,195)"/><rect x="298" y="113" width="13" height="13" fill="white" transform="rotate(45,305,120)"/><rect x="213" y="38" width="13" height="13" fill="white" transform="rotate(45,220,45)"/><rect x="128" y="113" width="13" height="13" fill="white" transform="rotate(45,135,120)"/><circle cx="305" cy="120" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="305" y="125" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><text x="220" y="207" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">Home</text><text x="323" y="124" text-anchor="start" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">1B</text><text x="220" y="34" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">2B</text><text x="112" y="124" text-anchor="end" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">3B</text></svg>
+    <div class="fc-bot"><div class="fc-name">Runner on 1st &mdash; move her up</div><div class="fc-tap">Tap for your move &rarr;</div></div>
+  </div>
+  <div class="flip-back fc-back">
+    <div class="fc-back-title">RF hit or pull left to move her</div>
+    <div class="fc-back-rules">
+      <div class="fc-back-row"><span class="fc-back-lbl">RF Hit</span><span class="fc-back-txt">A powerful RF hit almost always moves R1 to 3rd. <strong>Look to 1B coach for signal to keep going to 2nd.</strong></span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Pull Left</span><span class="fc-back-txt">Pull the ball toward 3B &mdash; longer throw gives your runner more time to reach 2nd.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Productive Out</span><span class="fc-back-txt">Out at 1st but moved runner to 2nd? <strong>That's a win.</strong> Runner in scoring position, next batter's turn.</span></div>
+    </div>
+    <div class="fc-return">Tap to flip back</div>
+  </div>
+</div>
+</div>
+
+<div class="flip" onclick="this.classList.toggle('flipped')">
+<div class="flip-inner">
+  <div class="flip-front fc-front" style="border-left:3px solid rgba(255,255,255,.12);">
+    <div class="fc-top"><span class="fc-num">BAT-4</span><div class="fc-outs"><div class="fc-pip"></div><div class="fc-pip"></div><span class="fc-out-txt">0 or 1 outs</span></div></div>
+    <svg class="fc-field" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="440" height="210" fill="#3a7a22"/><polygon points="220,195 305,120 220,45 135,120" fill="#c49040" opacity=".5"/><line x1="220" y1="210" x2="440" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="210" x2="0" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="195" x2="305" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="305" y1="120" x2="220" y2="45" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="220" y1="45" x2="135" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="135" y1="120" x2="220" y2="195" stroke="rgba(255,255,255,.5)" stroke-width="2"/><rect x="213" y="188" width="14" height="14" fill="white" transform="rotate(45,220,195)"/><rect x="298" y="113" width="13" height="13" fill="white" transform="rotate(45,305,120)"/><rect x="213" y="38" width="13" height="13" fill="white" transform="rotate(45,220,45)"/><rect x="128" y="113" width="13" height="13" fill="white" transform="rotate(45,135,120)"/><circle cx="305" cy="120" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="305" y="125" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><circle cx="220" cy="45" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="220" y="50" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><circle cx="135" cy="120" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="135" y="125" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><text x="220" y="207" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">Home</text></svg>
+    <div class="fc-bot"><div class="fc-name">Bases loaded</div><div class="fc-tap">Tap for your move &rarr;</div></div>
+  </div>
+  <div class="flip-back fc-back">
+    <div class="fc-back-title">Just make contact &mdash; right side</div>
+    <div class="fc-back-rules">
+      <div class="fc-back-row"><span class="fc-back-lbl">Goal</span><span class="fc-back-txt"><strong>Put the ball in play to the right side.</strong> Any hit scores the runner at 3rd.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Swing Smart</span><span class="fc-back-txt">Don't try to hit a home run. <strong>A strikeout with bases loaded is a bummer.</strong> Eye on ball, swing, make contact, run.</span></div>
+    </div>
+    <div class="fc-return">Tap to flip back</div>
+  </div>
+</div>
+</div>
+
+<div class="flip" onclick="this.classList.toggle('flipped')">
+<div class="flip-inner">
+  <div class="flip-front fc-front" style="border-left:3px solid rgba(255,255,255,.12);">
+    <div class="fc-top"><span class="fc-num">BAT-5</span><div class="fc-outs"><div class="fc-pip out"></div><div class="fc-pip out"></div><span class="fc-out-txt">2 outs</span></div></div>
+    <svg class="fc-field" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="440" height="210" fill="#3a7a22"/><polygon points="220,195 305,120 220,45 135,120" fill="#c49040" opacity=".5"/><line x1="220" y1="210" x2="440" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="210" x2="0" y2="0" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="220" y1="195" x2="305" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="305" y1="120" x2="220" y2="45" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="220" y1="45" x2="135" y2="120" stroke="rgba(255,255,255,.5)" stroke-width="2"/><line x1="135" y1="120" x2="220" y2="195" stroke="rgba(255,255,255,.5)" stroke-width="2"/><rect x="213" y="188" width="14" height="14" fill="white" transform="rotate(45,220,195)"/><rect x="298" y="113" width="13" height="13" fill="white" transform="rotate(45,305,120)"/><rect x="213" y="38" width="13" height="13" fill="white" transform="rotate(45,220,45)"/><rect x="128" y="113" width="13" height="13" fill="white" transform="rotate(45,135,120)"/><circle cx="220" cy="45" r="14" fill="#ffd97a" stroke="rgba(255,255,255,.7)" stroke-width="2"/><text x="220" y="50" text-anchor="middle" font-size="11" font-weight="900" fill="#1a1a1a" font-family="Nunito,sans-serif">R</text><text x="220" y="165" text-anchor="middle" font-size="26" font-weight="900" fill="rgba(255,112,96,.6)" font-family="Nunito,sans-serif">2 OUTS</text><text x="220" y="207" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.45)" font-family="Nunito,sans-serif" font-weight="700">Home</text></svg>
+    <div class="fc-bot"><div class="fc-name">2 outs &mdash; any situation</div><div class="fc-tap">Tap for your move &rarr;</div></div>
+  </div>
+  <div class="flip-back fc-back">
+    <div class="fc-back-title">Swing away &mdash; just make contact</div>
+    <div class="fc-back-rules">
+      <div class="fc-back-row"><span class="fc-back-lbl">Goal</span><span class="fc-back-txt"><strong>Swing at good pitches and put the ball in play.</strong> With 2 outs, make contact and let your runners go.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Runners</span><span class="fc-back-txt">All runners <strong>go on contact</strong> with 2 outs. Your only job: make contact.</span></div>
+      <div class="fc-back-row"><span class="fc-back-lbl">Strike Out?</span><span class="fc-back-txt">Even the best strike out. <strong>Keep swinging, have fun, try your best.</strong></span></div>
+    </div>
+    <div class="fc-return">Tap to flip back</div>
+  </div>
+</div>
+</div>
+
+</div><!-- flip-stack -->
+</div><!-- sec -->
+</div><!-- /tab-bat -->
+
+</div><!-- app -->
 <script>
+// ═══════════════════════════════════════════════════════════════
+// SHARED CONSTANTS
+// ═══════════════════════════════════════════════════════════════
 const DS_W=440,DS_H=490;
 const PT={home:{x:220,y:463},b1:{x:381,y:302},b2:{x:220,y:141},b3:{x:59,y:302},mound:{x:220,y:302}};
 
-const PDEF={
-  P:   {sx:220,sy:302,color:'var(--col-p)',  sz:34,label:'P',  fs:11},
-  '1B':{sx:360,sy:282,color:'var(--col-1b)', sz:33,label:'1B', fs:10},
-  '2B':{sx:274,sy:200,color:'var(--col-2b)', sz:33,label:'2B', fs:10},
-  SS:  {sx:168,sy:200,color:'var(--col-ss)', sz:33,label:'SS', fs:10},
-  '3B':{sx:80, sy:282,color:'var(--col-3b)', sz:33,label:'3B', fs:10},
-  LF:  {sx:50, sy:160,color:'var(--col-of)', sz:30,label:'LF', fs:10},
-  LCF: {sx:170,sy:70, color:'var(--col-of)', sz:28,label:'LCF',fs:9 },
-  RCF: {sx:310,sy:70, color:'var(--col-of)', sz:28,label:'RCF',fs:9 },
-  RF:  {sx:420,sy:160,color:'var(--col-of)', sz:30,label:'RF', fs:10},
-};
-
-const POS_COL={
-  P:   {bg:'rgba(139,69,19,.3)',  border:'#c47028',text:'#e8902a'},
-  '1B':{bg:'rgba(7,110,80,.3)',   border:'#0d9e74',text:'#0fbe8c'},
-  '2B':{bg:'rgba(19,85,160,.3)',  border:'#1e7fd4',text:'#3da0f0'},
-  SS:  {bg:'rgba(184,48,16,.3)',  border:'#e03c14',text:'#f06040'},
-  '3B':{bg:'rgba(83,40,168,.3)',  border:'#7040dc',text:'#9070f0'},
-  LF:  {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
-  LCF: {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
-  RCF: {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
-  RF:  {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
-};
-const POS_NAMES={P:'Pitcher','1B':'First Base','2B':'Second Base',SS:'Shortstop','3B':'Third Base',LF:'Left Field',LCF:'Left Center',RCF:'Right Center',RF:'Right Field'};
-
-// ─── ALL SCENARIOS ──────────────────────────
-const SCENARIOS=[
-  // 0 — Ball to Pitcher
-  {name:'Ball to pitcher / up the middle',runner:false,
-   desc:'Pitcher stops the ball and throws to 1st. 2B covers 2nd. SS drifts toward 2B as backup — not stacking. LCF shades toward 2B. RF backs up the 1B line.',
-   hit:{x:220,y:305},thrower:'P',throwTo:{x:381,y:302},relay:null,
-   moves:{P:{x:220,y:305},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:196,y:178},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:292,y:100},RF:{x:400,y:218}},
-   spotlight:{P:'YOUR BALL! Get in front of it and throw to 1st base!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base and be ready for a throw!',SS:'Drift toward 2nd as a backup — stay a few steps away, not on top of 2B.','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Watch for any ball past the infield.',LCF:'Shift a little toward 2nd. Be ready to run down a wild throw.',RCF:'Move in behind 2nd base — back up the play.',RF:'Move toward 1st to back up an overthrow.'}},
-
-  // 1 — Left Side
-  {name:'Ground ball — left side (SS / 3B)',runner:false,
-   desc:'Shortstop fields and fires to 1st. 2B covers 2nd. Pitcher drifts slightly right — stays near mound ready to receive ball back. RF backs up the 1B line.',
-   hit:{x:155,y:218},thrower:'SS',throwTo:{x:381,y:302},relay:null,
-   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
-   spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base — cover the bag in case the throw comes your way!',SS:'YOUR BALL! Field it clean. If easy out at 2B, go there, otherwise throw to Pitcher to hold or 1st base!','3B':'Stay at 3rd base. Anchor your bag.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area in case of a wild throw.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow down the line.'}},
-
-  // 2 — Right Side
-  {name:'Ground ball — right side (2B / 1B)',runner:false,
-   desc:'2B fields and throws to 1st. Shortstop sprints to cover 2nd. Pitcher stays near mound. LCF shades toward 2B. RF backs up 1B line.',
-   hit:{x:278,y:218},thrower:'2B',throwTo:{x:381,y:302},relay:null,
-   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:278,y:218},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:312,y:130},RF:{x:400,y:218}},
-   spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'YOUR BALL! Field it clean and throw to 1st base!',SS:'Sprint to 2nd base — cover the bag right now!','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Stay ready.',LCF:'Shift toward 2nd — be ready to run down a wild throw.',RCF:'Back up the 2nd base area.',RF:'Move toward 1st to back up an overthrow down the line.'}},
-
-  // 3 — Left Field
-  {name:'Ball to left field',runner:false,
-   desc:'LF charges and throws to SS relay. SS steps out toward LF. 2B covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. RCF shifts toward 2B.',
-   hit:{x:52,y:92},thrower:'LF',throwTo:{x:145,y:168},relay:{player:'SS',relayPos:{x:145,y:168},relayTo:{x:232,y:150}},
-   moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:145,y:168},'3B':{x:62,y:295},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
-   spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. Play may go home!','1B':'Stay at 1st base and hold your spot.','2B':'Cover 2nd bag — be ready for the relay throw from SS!',SS:'Step out toward LF — catch the relay throw and fire to 2nd!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'YOUR BALL! Charge it hard and throw to the shortstop relay!',LCF:'Back up LF — if she misses it, you get the ball!',RCF:'Shift in toward 2nd — cover any wild relay throw.',RF:'Drift toward 1st base — back up the right side.'}},
-
-  // 4 — Right Field
-  {name:'Ball to right field',runner:false,
-   desc:'RF grabs it and throws to 2B relay. 2B steps out toward RF. SS covers 2nd. Pitcher drifts toward home — ready to cut a throw to the plate. LCF shifts toward 2B.',
-   hit:{x:418,y:92},thrower:'RF',throwTo:{x:298,y:168},relay:{player:'2B',relayPos:{x:298,y:168},relayTo:{x:222,y:150}},
-   moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:298,y:168},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:90,y:142},LCF:{x:205,y:98},RCF:{x:338,y:108},RF:{x:418,y:92}},
-   spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. Play may go home!','1B':'Stay at 1st base and hold your spot.','2B':'Step out toward RF — catch the relay throw and fire to 2nd!',SS:'Cover 2nd bag — be ready for the relay from 2B!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'Drift a little toward 2nd — cover a wild throw that gets past 2B.',LCF:'Shift in toward 2nd — be ready to run down a wild relay.',RCF:'Back up RF — if she misses it, you get the ball!',RF:'YOUR BALL! Charge it hard and throw to the 2B relay!'}},
-
-  // 5 — Runner on 1B, Left Side Hit
-  {name:'Runner on 1B — left side hit',runner:true,
-   runnerStart:PT.b1, runnerEnd:{x:298,y:222}, runnerOut:true,
-   desc:'Runner on 1st! SS fields and throws to 2nd for the force out on the lead runner. 2B covers 2nd. 1B stays at the bag. Pitcher stays near mound ready to receive ball back.',
-   hit:{x:155,y:218},thrower:'SS',throwTo:{x:232,y:150},relay:null,
-   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
-   spotlight:{P:'Stay near the mound — freeze the runners by getting the ball back fast!','1B':'Stay at 1st bag — the runner is coming, hold your ground.','2B':'Cover 2nd bag — the runner is heading to you! Get ready for the force out!',SS:'YOUR BALL! Field it and run or throw to 2nd — get the lead runner!','3B':'Stay at 3rd. If the play goes wrong, the runner might keep going — be ready.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow.'}},
-
-  // 6 — Runner on 2B, Left Field Hit → throw to 3B
-  {name:'Runner on 2B — LF hit, throw to 3rd',runner:true,
-   runnerStart:PT.b2, runnerEnd:{x:128,y:228}, runnerHeld:true,
-   desc:'Runner on 2nd trying to score! LF charges and throws directly to 3rd base to hold the runner. SS backs up 3rd. Pitcher drifts toward home — last line of defense!',
-   hit:{x:52,y:92},thrower:'LF',throwTo:{x:60,y:300},relay:null,
-   moves:{P:{x:198,y:415},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:90,y:258},'3B':{x:60,y:300},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
-   spotlight:{P:'Drift toward home plate — if the runner beats 3B, YOU are the last stop before she scores!','1B':'Stay at 1st base. Hold your spot.','2B':'Cover 2nd bag — the runner has left it, lock it down.',SS:'Back up 3rd — if the throw is wild, you stop the runner from scoring!','3B':'HOLD THE BAG! Catch the throw from LF and make the tag — do not let her score!',LF:'YOUR BALL! Charge it fast and throw DIRECTLY to 3rd base — hold that runner!',LCF:'Back up LF — if she misses it, you field and throw to 3rd!',RCF:'Shift toward center. Be ready if the ball comes your way.',RF:'Hold your position and back up the right side.'}},
-
-  // 7 — Runner on 1B, Pop Up to 2B, double play
-  {name:'Pop up to 2B — double play!',runner:true,
-   runnerStart:PT.b1, runnerEnd:{x:318,y:238}, runnerOut:true,
-   desc:'Runner on 1st took off running. 2B catches the pop up — out #1! Runner has to get back to 1st. 2B fires to 1B — out #2! Double play! 1B must stay on the bag.',
-   hit:{x:285,y:195},thrower:'2B',throwTo:{x:379,y:300},relay:null,
-   moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:285,y:195},SS:{x:222,y:148},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:312,y:130},RF:{x:400,y:218}},
-   spotlight:{P:'Stay near the mound — be ready to receive the ball back once the double play is done.','1B':'STAY ON THE BAG! The runner left early — catch the throw for the double play! Do not move!','2B':'YOUR BALL — catch the pop up for out #1, then fire to 1st for out #2! Double play!',SS:'Cover 2nd base — the runner might try to reach there.','3B':'Stay at 3rd base. Anchor your bag.',LF:'Hold your position. Stay alert.',LCF:'Move toward 2B — back up the infield.',RCF:'Move toward 2B - back up the 2nd base area.',RF:'Back up the 1st base line.'}},
-];
-
-// ─── STATE ──────────────────────────────────
-let scale=1,currentSc=-1,playing=false,speedMult=1.85,mySpot=null;
-let playerEls={},ballEl=null,runnerEl=null,fieldOuter=null;
-
-// ─── HELPERS ────────────────────────────────
-function d(base){return Math.round(base*speedMult);}
-function playerTransStr(){const t=(0.95*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.35,.64,1),top ${t}s cubic-bezier(.34,1.35,.64,1),box-shadow .2s,opacity .35s`;}
-function runnerTransStr(){const t=(1.1*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.2,.64,1),top ${t}s cubic-bezier(.34,1.2,.64,1)`;}
-function applyTransitions(){Object.values(playerEls).forEach(el=>{el.style.transition=playerTransStr();});}
-
-// ─── SPOTLIGHT ──────────────────────────────
-function applySpotlight(){
-  Object.keys(playerEls).forEach(id=>{
-    const el=playerEls[id];
-    el.classList.remove('spotlight','dimmed');
-    if(mySpot===null)return;
-    if(id===mySpot)el.classList.add('spotlight');
-    else el.classList.add('dimmed');
-  });
-  updateSpotCallout();
-}
-function updateSpotCallout(){
-  const box=document.getElementById('spotCallout');
-  if(mySpot===null||currentSc<0){box.style.display='none';return;}
-  const sc=SCENARIOS[currentSc],col=POS_COL[mySpot];
-  document.getElementById('spotCalloutHead').style.background=col.bg;
-  document.getElementById('spotCalloutDot').style.background=col.border;
-  const posLabel=document.getElementById('spotCalloutPos');
-  posLabel.style.color=col.text; posLabel.textContent=POS_NAMES[mySpot].toUpperCase();
-  document.getElementById('spotCalloutText').textContent=sc.spotlight[mySpot];
-  box.style.display='block';
-}
-
-// ─── BUILD FIELD ────────────────────────────
-function buildField(){
-  fieldOuter=document.getElementById('fieldOuter');
-  const aw=fieldOuter.clientWidth||440;
-  scale=aw/DS_W;
-  fieldOuter.style.height=(DS_H*scale)+'px';
-  const ns='http://www.w3.org/2000/svg';
-  const svg=document.createElementNS(ns,'svg');
-  svg.setAttribute('viewBox',`0 0 ${DS_W} ${DS_H}`);
-  svg.setAttribute('width','100%'); svg.setAttribute('height','100%');
-  svg.style.cssText='position:absolute;top:0;left:0;z-index:1;';
-  function el(tag,attrs){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
-  function tlabel(x,y,str,anchor='middle'){const t=el('text',{x,y,'text-anchor':anchor,'font-size':'10.5',fill:'rgba(255,255,255,0.5)','font-family':'Nunito,sans-serif','font-weight':'800'});t.textContent=str;return t;}
-  svg.appendChild(el('rect',{x:0,y:0,width:DS_W,height:DS_H,fill:'#4a8c1c'}));
-  svg.appendChild(el('polygon',{points:`0,${DS_H} ${PT.home.x},${PT.home.y} ${DS_W},${DS_H}`,fill:'rgba(0,0,0,.07)'}));
-  svg.appendChild(el('polygon',{points:`${PT.home.x},${PT.home.y} ${PT.b1.x},${PT.b1.y} ${PT.b2.x},${PT.b2.y} ${PT.b3.x},${PT.b3.y}`,fill:'#c8943a'}));
-  svg.appendChild(el('polygon',{points:`${PT.mound.x},${PT.home.y-38} ${PT.b1.x-38},${PT.b1.y} ${PT.mound.x},${PT.b2.y+38} ${PT.b3.x+38},${PT.b3.y}`,fill:'rgba(58,110,20,.22)'}));
-  svg.appendChild(el('line',{x1:220,y1:463,x2:480,y2:203,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
-  svg.appendChild(el('line',{x1:0,y1:243,x2:220,y2:463,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
-  [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'rgba(255,255,255,.5)','stroke-width':'2.5'})));
-  svg.appendChild(el('circle',{cx:PT.mound.x,cy:PT.mound.y,r:26,fill:'#daa848',opacity:'.4',stroke:'rgba(255,255,255,.22)','stroke-width':'1.5'}));
-  [{c:PT.home,s:14},{c:PT.b1,s:12},{c:PT.b2,s:12},{c:PT.b3,s:12}].forEach(({c,s})=>svg.appendChild(el('rect',{x:c.x-s/2,y:c.y-s/2,width:s,height:s,fill:'white',stroke:'rgba(160,140,100,.5)','stroke-width':'1',transform:`rotate(45,${c.x},${c.y})`})));
-  svg.appendChild(tlabel(PT.home.x,PT.home.y+20,'Home'));
-  svg.appendChild(tlabel(PT.b2.x,PT.b2.y-16,'2B'));
-  svg.appendChild(tlabel(PT.b1.x+18,PT.b1.y+5,'1B','start'));
-  svg.appendChild(tlabel(PT.b3.x-18,PT.b3.y+5,'3B','end'));
-  fieldOuter.appendChild(svg);
-  Object.entries(PDEF).forEach(([id,p])=>{
-    const div=document.createElement('div');
-    div.className='player'; div.id='pl-'+id;
-    div.style.cssText=`width:${p.sz}px;height:${p.sz}px;background:${p.color};font-size:${p.fs}px;left:${p.sx*scale}px;top:${p.sy*scale}px;`;
-    div.textContent=p.label; fieldOuter.appendChild(div); playerEls[id]=div;
-  });
-  runnerEl=document.createElement('div');
-  runnerEl.className='runner';
-  runnerEl.style.cssText=`width:20px;height:20px;background:rgba(255,120,0,.55);font-size:9px;left:${PT.b1.x*scale}px;top:${PT.b1.y*scale}px;`;
-  runnerEl.textContent='R'; fieldOuter.appendChild(runnerEl);
-  ballEl=document.createElement('div');
-  ballEl.className='ball';
-  ballEl.style.cssText=`width:16px;height:16px;left:${PT.home.x*scale}px;top:${PT.home.y*scale}px;`;
-  fieldOuter.appendChild(ballEl);
-  applyTransitions();
-}
-
-// ─── RESET ──────────────────────────────────
-function resetPlayers(instant){
-  Object.entries(PDEF).forEach(([id,p])=>{
-    const el=playerEls[id];
-    if(instant)el.style.transition='none';
-    el.style.left=(p.sx*scale)+'px'; el.style.top=(p.sy*scale)+'px';
-    el.classList.remove('has-ball');
-    if(instant)setTimeout(()=>{el.style.transition=playerTransStr();applySpotlight();},35);
-  });
-  runnerEl.style.transition='none'; runnerEl.style.opacity='1'; runnerEl.style.display='none';
-  setTimeout(()=>{runnerEl.style.transition=runnerTransStr();},35);
-  ballEl.style.display='none';
-  ballEl.style.left=(PT.home.x*scale)+'px'; ballEl.style.top=(PT.home.y*scale)+'px';
-}
-
-function placeRunner(sc){
-  const rs=sc.runnerStart||PT.b1;
-  runnerEl.style.left=(rs.x*scale)+'px'; runnerEl.style.top=(rs.y*scale)+'px';
-  runnerEl.style.display='flex';
-}
-
-// ─── BALL ANIMATION ──────────────────────────
-function animBall(fx,fy,tx,ty,dur,cb){
-  ballEl.style.display='block';
-  const t0=performance.now(),fxs=fx*scale,fys=fy*scale,txs=tx*scale,tys=ty*scale;
-  function frame(now){
-    const p=Math.min((now-t0)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
-    ballEl.style.left=(fxs+(txs-fxs)*e)+'px'; ballEl.style.top=(fys+(tys-fys)*e)+'px';
-    if(p<1)requestAnimationFrame(frame);
-    else{ballEl.style.left=txs+'px';ballEl.style.top=tys+'px';if(cb)cb();}
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════════
+let activeTab='def';
+const tabInited={def:false,br:false};
+function switchTab(t){
+  if(activeTab===t)return;
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['def','br','bat'][i]===t));
+  document.querySelectorAll('.tab-pane').forEach(el=>el.style.display=el.id==='tab-'+t?'':'none');
+  activeTab=t;
+  if(!tabInited[t]){
+    tabInited[t]=true;
+    if(t==='br') BR.buildField();
   }
-  requestAnimationFrame(frame);
 }
 
-// ─── PIPS ────────────────────────────────────
-function setPips(n){[0,1,2,3].forEach(i=>document.getElementById('pp'+i).classList.toggle('lit',i<n));}
+// ═══════════════════════════════════════════════════════════════
+// DEFENSE MODULE
+// ═══════════════════════════════════════════════════════════════
+const DEF=(function(){
+  let scale=1,currentSc=-1,playing=false,speedMult=1.85,mySpot=null;
+  let playerEls={},ballEl=null,runnerEl=null,fieldOuter=null;
 
-// ─── SET SPEED ───────────────────────────────
-function setSpeed(mult,key){
-  if(playing)return;
-  speedMult=mult;
-  document.querySelectorAll('.speed-btn').forEach((b,i)=>b.classList.toggle('on',['slow','norm','fast'][i]===key));
-  applyTransitions();
-}
+  const PDEF={
+    P:   {sx:220,sy:302,color:'var(--col-p)',  sz:34,label:'P',  fs:11},
+    '1B':{sx:360,sy:282,color:'var(--col-1b)', sz:33,label:'1B', fs:10},
+    '2B':{sx:274,sy:200,color:'var(--col-2b)', sz:33,label:'2B', fs:10},
+    SS:  {sx:168,sy:200,color:'var(--col-ss)', sz:33,label:'SS', fs:10},
+    '3B':{sx:80, sy:282,color:'var(--col-3b)', sz:33,label:'3B', fs:10},
+    LF:  {sx:50, sy:160,color:'var(--col-of)', sz:30,label:'LF', fs:10},
+    LCF: {sx:170,sy:70, color:'var(--col-of)', sz:28,label:'LCF',fs:9 },
+    RCF: {sx:310,sy:70, color:'var(--col-of)', sz:28,label:'RCF',fs:9 },
+    RF:  {sx:420,sy:160,color:'var(--col-of)', sz:30,label:'RF', fs:10},
+  };
+  const POS_COL={
+    P:   {bg:'rgba(139,69,19,.3)',  border:'#c47028',text:'#e8902a'},
+    '1B':{bg:'rgba(7,110,80,.3)',   border:'#0d9e74',text:'#0fbe8c'},
+    '2B':{bg:'rgba(19,85,160,.3)',  border:'#1e7fd4',text:'#3da0f0'},
+    SS:  {bg:'rgba(184,48,16,.3)',  border:'#e03c14',text:'#f06040'},
+    '3B':{bg:'rgba(83,40,168,.3)',  border:'#7040dc',text:'#9070f0'},
+    LF:  {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
+    LCF: {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
+    RCF: {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
+    RF:  {bg:'rgba(45,110,16,.3)',  border:'#3d9616',text:'#6dc82a'},
+  };
+  const POS_NAMES={P:'Pitcher','1B':'First Base','2B':'Second Base',SS:'Shortstop','3B':'Third Base',
+    LF:'Left Field',LCF:'Left Center',RCF:'Right Center',RF:'Right Field'};
 
-// ─── SET SPOT ────────────────────────────────
-function setSpot(pos){
-  mySpot=pos;
-  document.querySelectorAll('.spot-btn').forEach(b=>{
-    const bp=b.dataset.pos||null;
-    b.classList.remove('on'); b.style.background=''; b.style.borderColor=''; b.style.color='';
-    if(pos===null&&bp===null){b.classList.add('on');return;}
-    if(bp===pos){b.classList.add('on');const col=POS_COL[pos];b.style.background=col.bg;b.style.borderColor=col.border;b.style.color=col.text;}
-  });
-  applySpotlight();
-}
+  const SCENARIOS=[
+    {name:'Ball to pitcher / up the middle',runner:false,
+     desc:'Pitcher stops the ball and throws to 1st. 2B covers 2nd. SS drifts toward 2B as backup. LCF shades toward 2B. RF backs up the 1B line.',
+     hit:{x:220,y:305},thrower:'P',throwTo:{x:381,y:302},relay:null,
+     moves:{P:{x:220,y:305},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:196,y:178},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:292,y:100},RF:{x:400,y:218}},
+     spotlight:{P:'YOUR BALL! Get in front of it and throw to 1st base!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base and be ready for a throw!',SS:'Drift toward 2nd as a backup — stay a few steps away, not on top of 2B.','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Watch for any ball past the infield.',LCF:'Shift a little toward 2nd. Be ready to run down a wild throw.',RCF:'Move in behind 2nd base — back up the play.',RF:'Move toward 1st to back up an overthrow.'}},
+    {name:'Ground ball — left side (SS / 3B)',runner:false,
+     desc:'Shortstop fields and fires to 1st. 2B covers 2nd. Pitcher drifts slightly right. RF backs up the 1B line.',
+     hit:{x:155,y:218},thrower:'SS',throwTo:{x:381,y:302},relay:null,
+     moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
+     spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'Sprint to 2nd base — cover the bag in case the throw comes your way!',SS:'YOUR BALL! Field it clean. If easy out at 2B, go there, otherwise throw to Pitcher to hold or 1st base!','3B':'Stay at 3rd base. Anchor your bag.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area in case of a wild throw.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow down the line.'}},
+    {name:'Ground ball — right side (2B / 1B)',runner:false,
+     desc:'2B fields and throws to 1st. Shortstop sprints to cover 2nd. Pitcher stays near mound. LCF shades toward 2B. RF backs up 1B line.',
+     hit:{x:278,y:218},thrower:'2B',throwTo:{x:381,y:302},relay:null,
+     moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:278,y:218},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:312,y:130},RF:{x:400,y:218}},
+     spotlight:{P:'Drift slightly right and stay near the mound — get ready to receive the ball back!','1B':'Run to 1st, foot on the bag, and hold your glove up high as a target!','2B':'YOUR BALL! Field it clean and throw to 1st base!',SS:'Sprint to 2nd base — cover the bag right now!','3B':'Stay at 3rd base. Anchor your bag — do not leave it.',LF:'Hold your position. Stay ready.',LCF:'Shift toward 2nd — be ready to run down a wild throw.',RCF:'Back up the 2nd base area.',RF:'Move toward 1st to back up an overthrow down the line.'}},
+    {name:'Ball to left field',runner:false,
+     desc:'LF charges and throws to SS relay. SS steps out toward LF. 2B covers 2nd. Pitcher drifts toward home. RCF shifts toward 2B.',
+     hit:{x:52,y:92},thrower:'LF',throwTo:{x:145,y:168},relay:{player:'SS',relayPos:{x:145,y:168},relayTo:{x:232,y:150}},
+     moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:145,y:168},'3B':{x:62,y:295},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
+     spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. Play may go home!','1B':'Stay at 1st base and hold your spot.','2B':'Cover 2nd bag — be ready for the relay throw from SS!',SS:'Step out toward LF — catch the relay throw and fire to 2nd!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'YOUR BALL! Charge it hard and throw to the shortstop relay!',LCF:'Back up LF — if she misses it, you get the ball!',RCF:'Shift in toward 2nd — cover any wild relay throw.',RF:'Drift toward 1st base — back up the right side.'}},
+    {name:'Ball to right field',runner:false,
+     desc:'RF grabs it and throws to 2B relay. 2B steps out toward RF. SS covers 2nd. Pitcher drifts toward home. LCF shifts toward 2B.',
+     hit:{x:418,y:92},thrower:'RF',throwTo:{x:298,y:168},relay:{player:'2B',relayPos:{x:298,y:168},relayTo:{x:222,y:150}},
+     moves:{P:{x:198,y:348},'1B':{x:379,y:300},'2B':{x:298,y:168},SS:{x:222,y:150},'3B':{x:62,y:295},LF:{x:90,y:142},LCF:{x:205,y:98},RCF:{x:338,y:108},RF:{x:418,y:92}},
+     spotlight:{P:'Drift toward home plate — you are the cutoff if a throw comes home. Play may go home!','1B':'Stay at 1st base and hold your spot.','2B':'Step out toward RF — catch the relay throw and fire to 2nd!',SS:'Cover 2nd bag — be ready for the relay from 2B!','3B':'Anchor 3rd base. A runner may be heading your way.',LF:'Drift a little toward 2nd — cover a wild throw that gets past 2B.',LCF:'Shift in toward 2nd — be ready to run down a wild relay.',RCF:'Back up RF — if she misses it, you get the ball!',RF:'YOUR BALL! Charge it hard and throw to the 2B relay!'}},
+    {name:'Runner on 1B — left side hit',runner:true,runnerStart:PT.b1,runnerEnd:{x:298,y:222},runnerOut:true,
+     desc:'Runner on 1st! SS fields and throws to 2nd for the force out on the lead runner. 2B covers 2nd. 1B stays at the bag.',
+     hit:{x:155,y:218},thrower:'SS',throwTo:{x:232,y:150},relay:null,
+     moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:155,y:218},'3B':{x:62,y:295},LF:{x:130,y:178},LCF:{x:126,y:114},RCF:{x:295,y:90},RF:{x:400,y:218}},
+     spotlight:{P:'Stay near the mound — freeze the runners by getting the ball back fast!','1B':'Stay at 1st bag — the runner is coming, hold your ground.','2B':'Cover 2nd bag — the runner is heading to you! Get ready for the force out!',SS:'YOUR BALL! Field it and run or throw to 2nd — get the lead runner!','3B':'Stay at 3rd. If the play goes wrong, the runner might keep going — be ready.',LF:'Back up behind the shortstop — be there if the ball gets past.',LCF:'Shift in — back up the 2nd base area.',RCF:'Move in and back up 2nd base.',RF:'Move toward 1st to back up an overthrow.'}},
+    {name:'Runner on 2B — LF hit, throw to 3rd',runner:true,runnerStart:PT.b2,runnerEnd:{x:128,y:228},runnerHeld:true,
+     desc:'Runner on 2nd trying to score! LF charges and throws directly to 3rd base to hold the runner. SS backs up 3rd. Pitcher drifts toward home — last line of defense!',
+     hit:{x:52,y:92},thrower:'LF',throwTo:{x:60,y:300},relay:null,
+     moves:{P:{x:198,y:415},'1B':{x:379,y:300},'2B':{x:232,y:150},SS:{x:90,y:258},'3B':{x:60,y:300},LF:{x:52,y:92},LCF:{x:108,y:118},RCF:{x:265,y:105},RF:{x:400,y:185}},
+     spotlight:{P:'Drift toward home plate — if the runner beats 3B, YOU are the last stop before she scores!','1B':'Stay at 1st base. Hold your spot.','2B':'Cover 2nd bag — the runner has left it, lock it down.',SS:'Back up 3rd — if the throw is wild, you stop the runner from scoring!','3B':'HOLD THE BAG! Catch the throw from LF and make the tag — do not let her score!',LF:'YOUR BALL! Charge it fast and throw DIRECTLY to 3rd base — hold that runner!',LCF:'Back up LF — if she misses it, you field and throw to 3rd!',RCF:'Shift toward center. Be ready if the ball comes your way.',RF:'Hold your position and back up the right side.'}},
+    {name:'Pop up to 2B — double play!',runner:true,runnerStart:PT.b1,runnerEnd:{x:318,y:238},runnerOut:true,
+     desc:'Runner on 1st took off running. 2B catches the pop up — out #1! Runner has to get back to 1st. 2B fires to 1B — out #2! Double play!',
+     hit:{x:285,y:195},thrower:'2B',throwTo:{x:379,y:300},relay:null,
+     moves:{P:{x:248,y:300},'1B':{x:379,y:300},'2B':{x:285,y:195},SS:{x:222,y:148},'3B':{x:62,y:295},LF:{x:60,y:170},LCF:{x:188,y:86},RCF:{x:312,y:130},RF:{x:400,y:218}},
+     spotlight:{P:'Stay near the mound — be ready to receive the ball back once the double play is done.','1B':'STAY ON THE BAG! The runner left early — catch the throw for the double play! Do not move!','2B':'YOUR BALL — catch the pop up for out #1, then fire to 1st for out #2! Double play!',SS:'Cover 2nd base — the runner might try to reach there.','3B':'Stay at 3rd base. Anchor your bag.',LF:'Hold your position. Stay alert.',LCF:'Move toward 2B — back up the infield.',RCF:'Move toward 2B - back up the 2nd base area.',RF:'Back up the 1st base line.'}},
+  ];
 
-// ─── SELECT SCENARIO ─────────────────────────
-// Collect all sc-btn across both grids in DOM order
-function allScBtns(){return document.querySelectorAll('.sc-btn');}
+  const GUIDE=[
+    {id:'P',badge:'#c47028',bbg:'rgba(139,69,19,.18)',name:'Pitcher',nick:'The Circle',jobs:[{label:'Be the Wall',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Stop anything hit up the middle. Get your body in front of the ball — keep it in the infield.'},{label:'Make the Throw',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Field it, look at 1st base right away, and make a clean throw; try underhand toss if close.'},{label:'Kill the Play',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Get back to your circle to stop the play!'}]},
+    {id:'1B',badge:'#0d9e74',bbg:'rgba(7,110,80,.18)',name:'First Base',nick:'The Target',jobs:[{label:'Be the Target',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit anywhere else? Sprint to 1st, foot on the bag, glove up high as a big target.'},{label:'Field & Touch',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit to you? Pick it up and step on 1st yourself — no throw needed.'},{label:'Safety Net',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Stay alert for overthrows — stop the ball from rolling into the outfield.'}]},
+    {id:'2B',badge:'#1e7fd4',bbg:'rgba(19,85,160,.18)',name:'Second Base',nick:'The Bridge',jobs:[{label:'Field to First',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball hit to you? First look is 1st base. Throw it there.'},{label:'Cover the Bag',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to pitcher or shortstop? Sprint to 2nd and be ready for a throw or a tag.'},{label:'RF Relay',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to right field? Step out toward RF — catch the throw and fire to 2nd, SS will be covering the bag.'}]},
+    {id:'SS',badge:'#e03c14',bbg:'rgba(184,48,16,.18)',name:'Shortstop',nick:'The Vacuum',jobs:[{label:'Own the Gap',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'You are the infield leader. Everything hit between 2nd and 3rd base is yours.'},{label:'Runner on 1st?',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Look to 2nd for the force out. Underhand if close, overhand if far. Not sure? Hold it.'},{label:'LF Relay',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Ball to left field? Step out toward LF — catch the throw and fire to 2nd or Pitcher.'}]},
+    {id:'3B',badge:'#7040dc',bbg:'rgba(83,40,168,.18)',name:'Third Base',nick:'Hot Corner',jobs:[{label:'Stop It First',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'The Hot Corner gets rockets. Keep the ball in front of you — body block if you have to.'},{label:'The Long Throw',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Fielded clean? Big power step and fire all the way to 1st. Not clean? Hold the runner.'},{label:'Anchor the Bag',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Ball hit to the right side? Stay near 3rd — a runner might try to sneak up.'}]},
+    {id:'LF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Field',nick:'The Left Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Run hard at every ball hit your way. Charge it — the faster you arrive, the sooner runners stop.'},{label:'One Target: SS',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to the shortstop relay, toward 2nd base. Never throw to 1st. Throw to 3rd ONLY if the play can be made.'},{label:'Back Up Third',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Ball to center field? Hustle behind 3rd base to cover a bad throw.'}]},
+    {id:'LCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Center',nick:'Gap Closer',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You cover the most ground. Lean in and take a step the moment the coach-pitcher winds up.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw toward SS or 2nd — always. No other targets.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or LF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
+    {id:'RCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Center',nick:'Cutoff Helper',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Best angle on the right side. Move the second the pitch is thrown — attack every ball.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw to 2nd base — always. Straight line back to the infield.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or RF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
+    {id:'RF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Field',nick:'Right Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Run hard at every ball hit your way. Don't wait and watch — go get it."},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to 2nd base every time. Too risky to throw to 1st or 3rd from right field.'},{label:'Back Up First',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Ball to the right-side infield? Shade toward 1st base in case of an overthrow your way."}]},
+  ];
+  const GOLDEN_RULES=[
+    {strong:'When in doubt, hold the ball in the infield.',rest:' A held runner beats a wild throw every time.'},
+    {strong:'Move on every pitch.',rest:' The moment the ball is hit, every player has a job. Move first, watch second.'},
+    {strong:'Ball always goes back to the pitcher.',rest:" Play isn't over until the pitcher has the ball in the circle."},
+    {strong:'Have a Plan for 2 Outs.',rest:" A runner crossing home doesn't count if you get a force out (usually 1B). Make the safest, easiest play. Look for the force out, not the tag."},
+  ];
 
-function selSc(i){
-  if(playing)return;
-  currentSc=i; resetPlayers(true);
-  allScBtns().forEach((b,j)=>b.classList.toggle('on',j===i));
-  const sc=SCENARIOS[i];
-  document.getElementById('infoName').textContent=sc.name;
-  document.getElementById('infoDesc').textContent=sc.desc;
-  document.getElementById('phaseBar').style.display='flex';
-  setPips(0);
-  const btn=document.getElementById('playBtn');
-  btn.disabled=false; btn.textContent='\u25B6\u00A0 Play';
-  if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
-  updateSpotCallout();
-}
+  function d(base){return Math.round(base*speedMult);}
+  function playerTransStr(){const t=(0.95*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.35,.64,1),top ${t}s cubic-bezier(.34,1.35,.64,1),box-shadow .2s,opacity .35s`;}
+  function runnerTransStr(){const t=(1.1*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.2,.64,1),top ${t}s cubic-bezier(.34,1.2,.64,1)`;}
+  function applyTransitions(){Object.values(playerEls).forEach(el=>el.style.transition=playerTransStr());}
 
-// ─── PLAY ────────────────────────────────────
-function doPlay(){
-  if(currentSc<0||playing)return;
-  playing=true;
-  const btn=document.getElementById('playBtn');
-  btn.disabled=true; btn.textContent='Playing\u2026';
-  const sc=SCENARIOS[currentSc];
-  resetPlayers(true);
-  if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
+  function applySpotlight(){
+    Object.keys(playerEls).forEach(id=>{
+      const el=playerEls[id]; el.classList.remove('spotlight','dimmed');
+      if(mySpot===null)return;
+      if(id===mySpot)el.classList.add('spotlight'); else el.classList.add('dimmed');
+    });
+    updateSpotCallout();
+  }
+  function updateSpotCallout(){
+    const box=document.getElementById('def-spotCallout');
+    if(mySpot===null||currentSc<0){box.style.display='none';return;}
+    const sc=SCENARIOS[currentSc],col=POS_COL[mySpot];
+    document.getElementById('def-spotCalloutHead').style.background=col.bg;
+    document.getElementById('def-spotCalloutDot').style.background=col.border;
+    const posLabel=document.getElementById('def-spotCalloutPos');
+    posLabel.style.color=col.text; posLabel.textContent=POS_NAMES[mySpot].toUpperCase();
+    document.getElementById('def-spotCalloutText').textContent=sc.spotlight[mySpot];
+    box.style.display='block';
+  }
 
-  setTimeout(()=>{
-    setPips(1);
-    animBall(PT.home.x,PT.home.y,sc.hit.x,sc.hit.y,d(420),()=>{
-      setPips(2);
-      Object.entries(sc.moves).forEach(([id,dest],i)=>{
-        setTimeout(()=>{playerEls[id].style.left=(dest.x*scale)+'px';playerEls[id].style.top=(dest.y*scale)+'px';},i*22);
+  function buildField(){
+    fieldOuter=document.getElementById('def-fieldOuter');
+    const aw=fieldOuter.clientWidth||440; scale=aw/DS_W;
+    fieldOuter.style.height=(DS_H*scale)+'px';
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox',`0 0 ${DS_W} ${DS_H}`);
+    svg.setAttribute('width','100%'); svg.setAttribute('height','100%');
+    svg.style.cssText='position:absolute;top:0;left:0;z-index:1;';
+    function el(tag,attrs){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
+    function tlabel(x,y,str,anchor='middle'){const t=el('text',{x,y,'text-anchor':anchor,'font-size':'10.5',fill:'rgba(255,255,255,0.5)','font-family':'Nunito,sans-serif','font-weight':'800'});t.textContent=str;return t;}
+    svg.appendChild(el('rect',{x:0,y:0,width:DS_W,height:DS_H,fill:'#4a8c1c'}));
+    svg.appendChild(el('polygon',{points:`0,${DS_H} ${PT.home.x},${PT.home.y} ${DS_W},${DS_H}`,fill:'rgba(0,0,0,.07)'}));
+    svg.appendChild(el('polygon',{points:`${PT.home.x},${PT.home.y} ${PT.b1.x},${PT.b1.y} ${PT.b2.x},${PT.b2.y} ${PT.b3.x},${PT.b3.y}`,fill:'#c8943a'}));
+    svg.appendChild(el('polygon',{points:`${PT.mound.x},${PT.home.y-38} ${PT.b1.x-38},${PT.b1.y} ${PT.mound.x},${PT.b2.y+38} ${PT.b3.x+38},${PT.b3.y}`,fill:'rgba(58,110,20,.22)'}));
+    svg.appendChild(el('line',{x1:220,y1:463,x2:480,y2:203,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
+    svg.appendChild(el('line',{x1:0,y1:243,x2:220,y2:463,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
+    [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'rgba(255,255,255,.5)','stroke-width':'2.5'})));
+    svg.appendChild(el('circle',{cx:PT.mound.x,cy:PT.mound.y,r:26,fill:'#daa848',opacity:'.4',stroke:'rgba(255,255,255,.22)','stroke-width':'1.5'}));
+    [{c:PT.home,s:14},{c:PT.b1,s:12},{c:PT.b2,s:12},{c:PT.b3,s:12}].forEach(({c,s})=>svg.appendChild(el('rect',{x:c.x-s/2,y:c.y-s/2,width:s,height:s,fill:'white',stroke:'rgba(160,140,100,.5)','stroke-width':'1',transform:`rotate(45,${c.x},${c.y})`})));
+    svg.appendChild(tlabel(PT.home.x,PT.home.y+20,'Home'));
+    svg.appendChild(tlabel(PT.b2.x,PT.b2.y-16,'2B'));
+    svg.appendChild(tlabel(PT.b1.x+18,PT.b1.y+5,'1B','start'));
+    svg.appendChild(tlabel(PT.b3.x-18,PT.b3.y+5,'3B','end'));
+    fieldOuter.appendChild(svg);
+    Object.entries(PDEF).forEach(([id,p])=>{
+      const div=document.createElement('div'); div.className='player'; div.id='def-pl-'+id;
+      div.style.cssText=`width:${p.sz}px;height:${p.sz}px;background:${p.color};font-size:${p.fs}px;left:${p.sx*scale}px;top:${p.sy*scale}px;`;
+      div.textContent=p.label; fieldOuter.appendChild(div); playerEls[id]=div;
+    });
+    runnerEl=document.createElement('div'); runnerEl.className='def-runner';
+    runnerEl.style.cssText=`width:20px;height:20px;background:rgba(255,120,0,.55);font-size:9px;left:${PT.b1.x*scale}px;top:${PT.b1.y*scale}px;`;
+    runnerEl.textContent='R'; fieldOuter.appendChild(runnerEl);
+    ballEl=document.createElement('div'); ballEl.className='def-ball';
+    ballEl.style.cssText=`width:16px;height:16px;left:${PT.home.x*scale}px;top:${PT.home.y*scale}px;`;
+    fieldOuter.appendChild(ballEl);
+    applyTransitions();
+  }
+
+  function buildGuide(){
+    const sec=document.getElementById('def-guideSection');
+    const hdr=document.createElement('div'); hdr.className='guide-hdr';
+    hdr.innerHTML='<div class="guide-hdr-line"></div><div class="guide-hdr-text">📋 Position Guide</div><div class="guide-hdr-line"></div>';
+    sec.appendChild(hdr);
+    const gr=document.createElement('div'); gr.className='golden-rules';
+    const grh=document.createElement('div'); grh.className='golden-rules-head';
+    grh.innerHTML='<span class="golden-rules-icon">⭐</span><span class="golden-rules-title">Golden Rules for Every Position</span>';
+    gr.appendChild(grh);
+    const grb=document.createElement('div'); grb.className='golden-rules-body';
+    GOLDEN_RULES.forEach(r=>{
+      const row=document.createElement('div'); row.className='golden-rule';
+      const dot=document.createElement('div'); dot.className='golden-rule-dot';
+      const txt=document.createElement('div'); txt.className='golden-rule-text';
+      txt.innerHTML=`<strong>${r.strong}</strong>${r.rest}`;
+      row.appendChild(dot); row.appendChild(txt); grb.appendChild(row);
+    });
+    gr.appendChild(grb); sec.appendChild(gr);
+    const iL=document.createElement('div'); iL.className='guide-group-label'; iL.textContent='Infield Positions'; sec.appendChild(iL);
+    GUIDE.slice(0,5).forEach(p=>sec.appendChild(makeCard(p)));
+    const oL=document.createElement('div'); oL.className='guide-group-label'; oL.style.marginTop='6px'; oL.textContent='Outfield Positions'; sec.appendChild(oL);
+    GUIDE.slice(5).forEach(p=>sec.appendChild(makeCard(p)));
+    const foot=document.createElement('div'); foot.className='guide-footer'; sec.appendChild(foot);
+  }
+
+  function makeCard(p){
+    const card=document.createElement('div'); card.className='pos-card'; card.style.borderLeft=`3px solid ${p.badge}`;
+    const head=document.createElement('div'); head.className='pos-card-head';
+    const badge=document.createElement('span'); badge.className='pos-badge'; badge.textContent=p.id; badge.style.cssText=`background:${p.bbg};color:${p.badge};`;
+    const name=document.createElement('span'); name.className='pos-name'; name.textContent=p.name;
+    const nick=document.createElement('span'); nick.className='pos-nick'; nick.textContent=p.nick;
+    head.appendChild(badge); head.appendChild(name); head.appendChild(nick); card.appendChild(head);
+    const ul=document.createElement('ul'); ul.className='pos-jobs';
+    p.jobs.forEach(j=>{
+      const li=document.createElement('li'); li.className='pos-job';
+      const lbl=document.createElement('span'); lbl.className='pos-job-label'; lbl.textContent=j.label; lbl.style.cssText=`background:${j.lc};color:${j.lcolor};`;
+      const txt=document.createElement('span'); txt.className='pos-job-text'; txt.textContent=j.text;
+      li.appendChild(lbl); li.appendChild(txt); ul.appendChild(li);
+    });
+    card.appendChild(ul); return card;
+  }
+
+  function resetPlayers(instant){
+    Object.entries(PDEF).forEach(([id,p])=>{
+      const el=playerEls[id]; if(instant)el.style.transition='none';
+      el.style.left=(p.sx*scale)+'px'; el.style.top=(p.sy*scale)+'px';
+      el.classList.remove('has-ball');
+      if(instant)setTimeout(()=>{el.style.transition=playerTransStr();applySpotlight();},35);
+    });
+    runnerEl.style.transition='none'; runnerEl.style.opacity='1'; runnerEl.style.display='none';
+    setTimeout(()=>{runnerEl.style.transition=runnerTransStr();},35);
+    ballEl.style.display='none';
+    ballEl.style.left=(PT.home.x*scale)+'px'; ballEl.style.top=(PT.home.y*scale)+'px';
+  }
+
+  function placeRunner(sc){
+    const rs=sc.runnerStart||PT.b1;
+    runnerEl.style.left=(rs.x*scale)+'px'; runnerEl.style.top=(rs.y*scale)+'px';
+    runnerEl.style.display='flex';
+  }
+
+  function animBall(fx,fy,tx,ty,dur,cb){
+    ballEl.style.display='block';
+    const t0=performance.now(),fxs=fx*scale,fys=fy*scale,txs=tx*scale,tys=ty*scale;
+    function frame(now){
+      const p=Math.min((now-t0)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+      ballEl.style.left=(fxs+(txs-fxs)*e)+'px'; ballEl.style.top=(fys+(tys-fys)*e)+'px';
+      if(p<1)requestAnimationFrame(frame);
+      else{ballEl.style.left=txs+'px';ballEl.style.top=tys+'px';if(cb)cb();}
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function setPips(n){[0,1,2,3].forEach(i=>document.getElementById('def-pp'+i).classList.toggle('lit',i<n));}
+
+  function selSc(i){
+    if(playing)return;
+    currentSc=i; resetPlayers(true);
+    document.querySelectorAll('#tab-def .def-sc').forEach((b,j)=>b.classList.toggle('on',j===i));
+    const sc=SCENARIOS[i];
+    document.getElementById('def-infoName').textContent=sc.name;
+    document.getElementById('def-infoDesc').textContent=sc.desc;
+    document.getElementById('def-phaseBar').style.display='flex';
+    setPips(0);
+    const btn=document.getElementById('def-playBtn');
+    btn.disabled=false; btn.textContent='\u25B6\u00A0 Play';
+    if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
+    updateSpotCallout();
+  }
+
+  function setSpeed(mult,key){
+    if(playing)return; speedMult=mult;
+    document.querySelectorAll('#tab-def .def-speed-btn').forEach((b,i)=>b.classList.toggle('on',['slow','norm','fast'][i]===key));
+    applyTransitions();
+  }
+
+  function setSpot(pos){
+    mySpot=pos;
+    document.querySelectorAll('#tab-def .spot-btn').forEach(b=>{
+      const bp=b.dataset.pos||null;
+      b.classList.remove('on'); b.style.background=''; b.style.borderColor=''; b.style.color='';
+      if(pos===null&&bp===null){b.classList.add('on');return;}
+      if(bp===pos){b.classList.add('on');const col=POS_COL[pos];b.style.background=col.bg;b.style.borderColor=col.border;b.style.color=col.text;}
+    });
+    applySpotlight();
+  }
+
+  function doPlay(){
+    if(currentSc<0||playing)return;
+    playing=true;
+    const btn=document.getElementById('def-playBtn');
+    btn.disabled=true; btn.textContent='Playing\u2026';
+    const sc=SCENARIOS[currentSc];
+    resetPlayers(true);
+    if(sc.runner){setTimeout(()=>placeRunner(sc),50);}
+    setTimeout(()=>{
+      setPips(1);
+      animBall(PT.home.x,PT.home.y,sc.hit.x,sc.hit.y,d(420),()=>{
+        setPips(2);
+        Object.entries(sc.moves).forEach(([id,dest],i)=>{
+          setTimeout(()=>{playerEls[id].style.left=(dest.x*scale)+'px';playerEls[id].style.top=(dest.y*scale)+'px';},i*22);
+        });
+        if(sc.runner){
+          setTimeout(()=>{
+            runnerEl.style.transition=runnerTransStr();
+            const re=sc.runnerEnd||PT.b2;
+            runnerEl.style.left=(re.x*scale)+'px'; runnerEl.style.top=(re.y*scale)+'px';
+          },200);
+        }
+        setTimeout(()=>{playerEls[sc.thrower].classList.add('has-ball');},d(380));
+        setTimeout(()=>{
+          setPips(3);
+          playerEls[sc.thrower].classList.remove('has-ball');
+          const from=sc.moves[sc.thrower];
+          animBall(from.x,from.y,sc.throwTo.x,sc.throwTo.y,d(360),()=>{
+            if(sc.relay){
+              playerEls[sc.relay.player].classList.add('has-ball');
+              setTimeout(()=>{
+                playerEls[sc.relay.player].classList.remove('has-ball');
+                animBall(sc.relay.relayPos.x,sc.relay.relayPos.y,sc.relay.relayTo.x,sc.relay.relayTo.y,d(310),returnBall);
+              },d(360));
+            } else {returnBall();}
+          });
+        },d(1080));
       });
-      // Runner advances to their end position
-      if(sc.runner){
+    },d(240));
+
+    function returnBall(){
+      setPips(4);
+      if(sc.runner&&sc.runnerOut){
+        setTimeout(()=>{runnerEl.style.transition='opacity 0.7s ease';runnerEl.style.opacity='0';},d(300));
+      }
+      if(sc.runner&&sc.runnerHeld){
         setTimeout(()=>{
           runnerEl.style.transition=runnerTransStr();
-          const re=sc.runnerEnd||PT.b2;
-          runnerEl.style.left=(re.x*scale)+'px'; runnerEl.style.top=(re.y*scale)+'px';
-        },200);
+          runnerEl.style.left=(sc.runnerStart.x*scale)+'px';
+          runnerEl.style.top=(sc.runnerStart.y*scale)+'px';
+        },d(300));
       }
-      setTimeout(()=>{playerEls[sc.thrower].classList.add('has-ball');},d(380));
+      document.getElementById('def-infoDesc').textContent='Kill the play! Ball goes back to the pitcher — all runners are frozen. Pitcher gets back to the circle.';
+      if(mySpot)updateSpotCallout();
+      const bx=parseFloat(ballEl.style.left)/scale,by=parseFloat(ballEl.style.top)/scale;
       setTimeout(()=>{
-        setPips(3);
-        playerEls[sc.thrower].classList.remove('has-ball');
-        const from=sc.moves[sc.thrower];
-        animBall(from.x,from.y,sc.throwTo.x,sc.throwTo.y,d(360),()=>{
-          if(sc.relay){
-            playerEls[sc.relay.player].classList.add('has-ball');
-            setTimeout(()=>{
-              playerEls[sc.relay.player].classList.remove('has-ball');
-              animBall(sc.relay.relayPos.x,sc.relay.relayPos.y,sc.relay.relayTo.x,sc.relay.relayTo.y,d(310),returnBall);
-            },d(360));
-          } else {returnBall();}
+        playerEls['P'].style.left=(PT.mound.x*scale)+'px'; playerEls['P'].style.top=(PT.mound.y*scale)+'px';
+        animBall(bx,by,PT.mound.x,PT.mound.y,d(500),()=>{
+          playerEls['P'].classList.add('has-ball');
+          setTimeout(()=>{playerEls['P'].classList.remove('has-ball');done();},d(550));
         });
-      },d(1080));
+      },d(320));
+    }
+    function done(){playing=false;btn.disabled=false;btn.textContent='\u21BA\u00A0 Play Again';}
+  }
+
+  function init(){
+    buildField(); buildGuide();
+    window.addEventListener('resize',()=>{
+      if(!fieldOuter)return;
+      scale=(fieldOuter.clientWidth||440)/DS_W;
+      fieldOuter.style.height=(DS_H*scale)+'px';
+      resetPlayers(true);
+      if(currentSc>=0&&SCENARIOS[currentSc].runner){
+        setTimeout(()=>placeRunner(SCENARIOS[currentSc]),55);
+      }
     });
-  },d(240));
+  }
 
-  function returnBall(){
-    setPips(4);
-    if(sc.runner && sc.runnerOut){
-      setTimeout(()=>{
-        runnerEl.style.transition='opacity 0.7s ease';
-        runnerEl.style.opacity='0';
-      }, d(300));
+  return {init,selSc,doPlay,setSpeed,setSpot};
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// BASERUNNING MODULE
+// ═══════════════════════════════════════════════════════════════
+const BR=(function(){
+  let currentSc=-1,playing=false,speedMult=1.85;
+  let runnerEls={},ballEl=null,signalEl=null;
+
+  function lp(x){return (x/DS_W*100)+'%';}
+  function tp(y){return (y/DS_H*100)+'%';}
+
+  const RDEF={
+    batter:{sx:220,sy:455,sz:30,label:'B', fs:10},
+    r1:    {sx:381,sy:302,sz:30,label:'R1',fs:9 },
+    r2:    {sx:220,sy:141,sz:30,label:'R2',fs:9 },
+    r3:    {sx:59, sy:302,sz:30,label:'R3',fs:9 },
+  };
+  const COACH_POS={coach3B:{x:22,y:335},coach1B:{x:418,y:335}};
+
+  const SC=[
+    {name:'Ball down the 3B line! (BR-9)',
+     desc:"Hard hit down the 3B line — R2 rounds 3rd and scores! Batter rounds 1st heading to 2nd. Run hard and look to your base coaches!",
+     hit:{x:25,y:268},flyBall:false,active:['r2','batter'],
+     moves:{r2:{x:59,y:302},batter:{x:381,y:302}},waypoints:{r2:{x:220,y:463},batter:{x:220,y:141}},waypointScored:['r2'],
+     signal:{id:'coach3B',text:'GO HOME!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+    {name:'Runner on 1B — ground ball, force! (BR-1)',
+     desc:'Ball on the ground with a runner on 1st — BOTH must go! R1 is forced to 2nd. Batter sprints to 1st. Nobody stops to watch.',
+     hit:{x:108,y:255},flyBall:false,active:['r1','batter'],
+     moves:{r1:{x:220,y:141},batter:{x:381,y:302}},
+     signal:{id:'coach3B',text:'KEEP GOING!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+    {name:'Runner on 2B — ground ball, right side (BR-2)',
+     desc:'Ball to 2B or 1B side — GO! R2 rounds 3rd hard. 3B coach waves you home when the throw goes to 1st.',
+     hit:{x:318,y:200},flyBall:false,active:['r2','batter'],
+     moves:{r2:{x:59,y:302},batter:{x:381,y:302}},waypoints:{r2:{x:220,y:463}},waypointScored:['r2'],
+     signal:{id:'coach3B',text:'GO HOME!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+    {name:'Runner on 2B — ground ball, left side (BR-2)',
+     desc:'Ball to SS or 3B — WAIT! R2 holds at 2nd. The defense may throw to 3rd. Only run when the 3B coach gives the signal.',
+     hit:{x:95,y:252},flyBall:false,active:['r2','batter'],
+     moves:{batter:{x:381,y:302}},
+     signal:{id:'coach3B',text:'HOLD at 2B!',bg:'rgba(110,20,15,.95)',color:'#ff8070'}},
+    {name:'Runner on 3B — ground ball, go home! (BR-3)',
+     desc:"Ball hits the ground — watch it land, then go on the 3B coach's signal. If the throw goes to 1st, that's your green light home!",
+     hit:{x:305,y:218},flyBall:false,active:['r3','batter'],
+     moves:{r3:{x:220,y:463},batter:{x:381,y:302}},scored:['r3'],
+     signal:{id:'coach3B',text:'GO HOME!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+    {name:'Deep fly ball — tag up and score! (BR-4)',
+     desc:'Ball caught deep in the outfield. R3 tags up at 3rd, then the 3B coach sends her home. Deep catch = long throw = you can score!',
+     hit:{x:220,y:55},flyBall:true,active:['r3'],
+     moves:{r3:{x:220,y:463}},scored:['r3'],
+     signal:{id:'coach3B',text:'TAG — GO!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+    {name:'Runner on 1B — hit to right field (BR-8)',
+     desc:'RF has the longest throw home. R1 takes one base at a time — 1B to 2B to 3rd. Batter follows: Home to 1B to 2nd. Watch the 3B coach!',
+     hit:{x:375,y:88},flyBall:false,active:['r1','batter'],
+     moves:{r1:{x:220,y:141},batter:{x:381,y:302}},waypoints:{r1:{x:59,y:302},batter:{x:220,y:141}},
+     signal:{id:'coach3B',text:'ROUND 3rd!',bg:'rgba(180,140,0,.95)',color:'#1a1a1a'}},
+    {name:'Runner on 2B — hit to left field (BR-6)',
+     desc:'LF has a long throw. R2 takes it one base at a time — 2B to 3B to Home. Batter: Home to 1B to 2nd. Look to the 3B coach for the wave!',
+     hit:{x:65,y:88},flyBall:false,active:['r2','batter'],
+     moves:{r2:{x:59,y:302},batter:{x:381,y:302}},waypoints:{r2:{x:220,y:463},batter:{x:220,y:141}},waypointScored:['r2'],
+     signal:{id:'coach3B',text:'GO HOME!',bg:'rgba(15,80,15,.95)',color:'#7de060'}},
+  ];
+
+  function d(base){return Math.round(base*speedMult);}
+  function runnerTrans(){const t=(0.95*speedMult).toFixed(2);return `left ${t}s cubic-bezier(.34,1.35,.64,1),top ${t}s cubic-bezier(.34,1.35,.64,1),opacity .4s`;}
+  function applyTrans(){Object.values(runnerEls).forEach(el=>el.style.transition=runnerTrans());}
+
+  function buildField(){
+    const fo=document.getElementById('br-fieldOuter');
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox',`0 0 ${DS_W} ${DS_H}`);
+    svg.setAttribute('width','100%'); svg.setAttribute('height','100%');
+    svg.style.cssText='position:absolute;top:0;left:0;z-index:1;display:block;';
+    function el(tag,attrs){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
+    function tlabel(x,y,t,a='middle'){const n=el('text',{x,y,'text-anchor':a,'font-size':'10.5',fill:'rgba(255,255,255,0.5)','font-family':'Nunito,sans-serif','font-weight':'800'});n.textContent=t;return n;}
+    svg.appendChild(el('rect',{x:0,y:0,width:DS_W,height:DS_H,fill:'#4a8c1c'}));
+    svg.appendChild(el('polygon',{points:`0,${DS_H} ${PT.home.x},${PT.home.y} ${DS_W},${DS_H}`,fill:'rgba(0,0,0,.07)'}));
+    svg.appendChild(el('polygon',{points:`${PT.home.x},${PT.home.y} ${PT.b1.x},${PT.b1.y} ${PT.b2.x},${PT.b2.y} ${PT.b3.x},${PT.b3.y}`,fill:'#c8943a'}));
+    svg.appendChild(el('polygon',{points:`${PT.mound.x},${PT.home.y-38} ${PT.b1.x-38},${PT.b1.y} ${PT.mound.x},${PT.b2.y+38} ${PT.b3.x+38},${PT.b3.y}`,fill:'rgba(58,110,20,.22)'}));
+    svg.appendChild(el('line',{x1:220,y1:463,x2:480,y2:203,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
+    svg.appendChild(el('line',{x1:0,y1:243,x2:220,y2:463,stroke:'rgba(255,255,255,.5)','stroke-width':'2'}));
+    [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>
+      svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'rgba(255,255,255,.5)','stroke-width':'2.5'})));
+    [[PT.home,PT.b1],[PT.b1,PT.b2],[PT.b2,PT.b3],[PT.b3,PT.home]].forEach(([a,b])=>{
+      const mx=a.x*.55+b.x*.45,my=a.y*.55+b.y*.45;
+      svg.appendChild(el('line',{x1:a.x,y1:a.y,x2:mx,y2:my,stroke:'rgba(255,255,255,.12)','stroke-width':'1.5','stroke-dasharray':'5,5'}));
+    });
+    svg.appendChild(el('circle',{cx:PT.mound.x,cy:PT.mound.y,r:26,fill:'#daa848',opacity:'.4',stroke:'rgba(255,255,255,.22)','stroke-width':'1.5'}));
+    [{c:PT.home,s:14},{c:PT.b1,s:12},{c:PT.b2,s:12},{c:PT.b3,s:12}].forEach(({c,s})=>
+      svg.appendChild(el('rect',{x:c.x-s/2,y:c.y-s/2,width:s,height:s,fill:'white',stroke:'rgba(160,140,100,.5)','stroke-width':'1',transform:`rotate(45,${c.x},${c.y})`})));
+    svg.appendChild(tlabel(PT.home.x,PT.home.y+20,'Home'));
+    svg.appendChild(tlabel(PT.b2.x,PT.b2.y-16,'2B'));
+    svg.appendChild(tlabel(PT.b1.x+18,PT.b1.y+5,'1B','start'));
+    svg.appendChild(tlabel(PT.b3.x-18,PT.b3.y+5,'3B','end'));
+    fo.appendChild(svg);
+    [{id:'coach1B',label:'1B\nCoach'},{id:'coach3B',label:'3B\nCoach'}].forEach(c=>{
+      const pos=COACH_POS[c.id];
+      const div=document.createElement('div'); div.className='br-coach'; div.id='br-'+c.id;
+      div.style.cssText=`width:5%;padding:2px 0;left:${lp(pos.x)};top:${tp(pos.y)};`;
+      div.innerHTML=`<span style="font-size:7px;line-height:1.2;">${c.label}</span>`;
+      fo.appendChild(div);
+    });
+    signalEl=document.createElement('div'); signalEl.className='br-signal';
+    fo.appendChild(signalEl);
+    Object.entries(RDEF).forEach(([id,p])=>{
+      const div=document.createElement('div'); div.className='br-runner'; div.id='br-run-'+id;
+      const szPct=(p.sz/DS_W*100)+'%';
+      div.style.cssText=`width:${szPct};aspect-ratio:1;background:#e8a820;font-size:${p.fs}px;left:${lp(p.sx)};top:${tp(p.sy)};display:none;`;
+      div.textContent=p.label; fo.appendChild(div); runnerEls[id]=div;
+    });
+    ballEl=document.createElement('div'); ballEl.className='br-ball';
+    ballEl.style.cssText=`left:${lp(PT.home.x)};top:${tp(PT.home.y)};`;
+    fo.appendChild(ballEl);
+    applyTrans();
+  }
+
+  function resetField(instant){
+    Object.entries(RDEF).forEach(([id,p])=>{
+      const el=runnerEls[id];
+      if(instant)el.style.transition='none';
+      el.style.left=lp(p.sx); el.style.top=tp(p.sy);
+      el.style.display='none'; el.style.opacity='1'; el.classList.remove('scored');
+      if(instant)setTimeout(()=>el.style.transition=runnerTrans(),30);
+    });
+    ballEl.style.display='none'; ballEl.style.left=lp(PT.home.x); ballEl.style.top=tp(PT.home.y);
+    signalEl.style.display='none';
+  }
+
+  function showRunners(sc){
+    sc.active.forEach(id=>{
+      const p=RDEF[id]; runnerEls[id].style.left=lp(p.sx); runnerEls[id].style.top=tp(p.sy);
+      runnerEls[id].style.opacity='1'; runnerEls[id].style.display='flex';
+    });
+  }
+
+  function animBall(fx,fy,tx,ty,dur,cb){
+    ballEl.style.display='block';
+    const t0=performance.now();
+    const fxp=fx/DS_W*100,fyp=fy/DS_H*100,txp=tx/DS_W*100,typ=ty/DS_H*100;
+    function frame(now){
+      const p=Math.min((now-t0)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+      ballEl.style.left=(fxp+(txp-fxp)*e)+'%'; ballEl.style.top=(fyp+(typ-fyp)*e)+'%';
+      if(p<1)requestAnimationFrame(frame);
+      else{ballEl.style.left=txp+'%';ballEl.style.top=typ+'%';if(cb)cb();}
     }
-    if(sc.runner && sc.runnerHeld){
-      setTimeout(()=>{
-        runnerEl.style.transition=runnerTransStr();
-        runnerEl.style.left=(sc.runnerStart.x*scale)+'px';
-        runnerEl.style.top=(sc.runnerStart.y*scale)+'px';
-      }, d(300));
-    }
-    document.getElementById('infoDesc').textContent='Kill the play! Ball goes back to the pitcher — all runners are frozen. Pitcher gets back to the circle.';
-    if(mySpot)updateSpotCallout();
-    const bx=parseFloat(ballEl.style.left)/scale,by=parseFloat(ballEl.style.top)/scale;
+    requestAnimationFrame(frame);
+  }
+
+  function setPips(n){[0,1,2].forEach(i=>document.getElementById('br-pp'+i).classList.toggle('lit',i<n));}
+
+  function showSignal(sig){
+    if(!sig)return;
+    const pos=COACH_POS[sig.id];
+    signalEl.style.left=lp(pos.x); signalEl.style.top=tp(pos.y+22);
+    signalEl.style.transform='translate(-50%,0)';
+    signalEl.style.background=sig.bg; signalEl.style.color=sig.color;
+    signalEl.style.borderColor=sig.color; signalEl.textContent=sig.text;
+    signalEl.style.display='block';
+  }
+
+  function fadeRunners(ids){
+    ids.forEach(id=>runnerEls[id].classList.add('scored'));
+    setTimeout(()=>ids.forEach(id=>{runnerEls[id].style.display='none';runnerEls[id].classList.remove('scored');}),d(450));
+  }
+
+  function selSc(i){
+    if(playing)return;
+    currentSc=i; resetField(true);
+    document.querySelectorAll('#tab-br .br-sc-btn').forEach((b,j)=>b.classList.toggle('on',j===i));
+    const sc=SC[i];
+    document.getElementById('br-infoName').textContent=sc.name;
+    document.getElementById('br-infoDesc').textContent=sc.desc;
+    document.getElementById('br-phaseBar').style.display='flex';
+    setPips(0);
+    const btn=document.getElementById('br-playBtn');
+    btn.disabled=false; btn.textContent='\u25B6\u00A0 Play';
+    setTimeout(()=>showRunners(sc),50);
+  }
+
+  function setSpeed(mult,key){
+    if(playing)return; speedMult=mult;
+    document.querySelectorAll('#tab-br .br-speed-btn').forEach((b,i)=>b.classList.toggle('on',['slow','norm','fast'][i]===key));
+    applyTrans();
+  }
+
+  function doPlay(){
+    if(currentSc<0||playing)return;
+    playing=true;
+    const btn=document.getElementById('br-playBtn');
+    btn.disabled=true; btn.textContent='Playing\u2026';
+    const sc=SC[currentSc];
+    resetField(true); setTimeout(()=>showRunners(sc),50);
     setTimeout(()=>{
-      playerEls['P'].style.left=(PT.mound.x*scale)+'px'; playerEls['P'].style.top=(PT.mound.y*scale)+'px';
-      animBall(bx,by,PT.mound.x,PT.mound.y,d(500),()=>{
-        playerEls['P'].classList.add('has-ball');
-        setTimeout(()=>{playerEls['P'].classList.remove('has-ball');done();},d(550));
+      setPips(1);
+      animBall(PT.home.x,PT.home.y,sc.hit.x,sc.hit.y,d(420),()=>{
+        const runDelay=sc.flyBall?d(680):0;
+        setTimeout(()=>{
+          setPips(2);
+          sc.active.forEach((id,i)=>{
+            const dest=sc.moves[id]; if(!dest)return;
+            setTimeout(()=>{runnerEls[id].style.left=lp(dest.x);runnerEls[id].style.top=tp(dest.y);},i*80);
+          });
+          setTimeout(()=>showSignal(sc.signal),d(300));
+          if(sc.scored) setTimeout(()=>fadeRunners(sc.scored),d(1100));
+          const wp=sc.waypoints,wpDelay=d(1050);
+          if(wp&&Object.keys(wp).length){
+            setTimeout(()=>{
+              Object.entries(wp).forEach(([id,dest],i)=>{
+                setTimeout(()=>{runnerEls[id].style.left=lp(dest.x);runnerEls[id].style.top=tp(dest.y);},i*80);
+              });
+              if(sc.waypointScored) setTimeout(()=>fadeRunners(sc.waypointScored),d(1100));
+            },wpDelay);
+          }
+          const haswp=wp&&Object.keys(wp).length>0;
+          const doneDur=haswp?wpDelay+d(1100)+d(350):d(1650);
+          setTimeout(()=>{
+            playing=false; setPips(3);
+            btn.disabled=false; btn.textContent='\u21BA\u00A0 Play Again';
+          },doneDur);
+        },runDelay);
       });
-    },d(320));
+    },d(280));
   }
-  function done(){playing=false;btn.disabled=false;btn.textContent='\u21BA\u00A0 Play Again';}
-}
 
-// ─── GUIDE ───────────────────────────────────
-const GUIDE=[
-  {id:'P',badge:'#c47028',bbg:'rgba(139,69,19,.18)',name:'Pitcher',nick:'The Circle',jobs:[{label:'Be the Wall',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Stop anything hit up the middle. Get your body in front of the ball — keep it in the infield.'},{label:'Make the Throw',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Field it, look at 1st base right away, and make a clean throw; try underhand toss if close.'},{label:'Kill the Play',lc:'rgba(196,112,40,.2)',lcolor:'#e8902a',text:'Get back to your circle to stop the play!'}]},
-  {id:'1B',badge:'#0d9e74',bbg:'rgba(7,110,80,.18)',name:'First Base',nick:'The Target',jobs:[{label:'Be the Target',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit anywhere else? Sprint to 1st, foot on the bag, glove up high as a big target.'},{label:'Field & Touch',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Ball hit to you? Pick it up and step on 1st yourself — no throw needed.'},{label:'Safety Net',lc:'rgba(13,158,116,.2)',lcolor:'#0fbe8c',text:'Stay alert for overthrows — stop the ball from rolling into the outfield.'}]},
-  {id:'2B',badge:'#1e7fd4',bbg:'rgba(19,85,160,.18)',name:'Second Base',nick:'The Bridge',jobs:[{label:'Field to First',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball hit to you? First look is 1st base. Throw it there.'},{label:'Cover the Bag',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to pitcher or shortstop? Sprint to 2nd and be ready for a throw or a tag.'},{label:'RF Relay',lc:'rgba(30,127,212,.2)',lcolor:'#3da0f0',text:'Ball to right field? Step out toward RF — catch the throw and fire to 2nd, SS will be covering the bag.'}]},
-  {id:'SS',badge:'#e03c14',bbg:'rgba(184,48,16,.18)',name:'Shortstop',nick:'The Vacuum',jobs:[{label:'Own the Gap',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'You are the infield leader. Everything hit between 2nd and 3rd base is yours.'},{label:'Runner on 1st?',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Look to 2nd for the force out. Underhand if close, overhand if far. Not sure? Hold it.'},{label:'LF Relay',lc:'rgba(224,60,20,.2)',lcolor:'#f06040',text:'Ball to left field? Step out toward LF — catch the throw and fire to 2nd or Pitcher.'}]},
-  {id:'3B',badge:'#7040dc',bbg:'rgba(83,40,168,.18)',name:'Third Base',nick:'Hot Corner',jobs:[{label:'Stop It First',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'The Hot Corner gets rockets. Keep the ball in front of you — body block if you have to.'},{label:'The Long Throw',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Fielded clean? Big power step and fire all the way to 1st. Not clean? Hold the runner.'},{label:'Anchor the Bag',lc:'rgba(112,64,220,.2)',lcolor:'#9070f0',text:'Ball hit to the right side? Stay near 3rd — a runner might try to sneak up.'}]},
-  {id:'LF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Field',nick:'The Left Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Run hard at every ball hit your way. Charge it — the faster you arrive, the sooner runners stop.'},{label:'One Target: SS',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to the shortstop relay, toward 2nd base. Never throw to 1st. Throw to 3rd ONLY if the play can be made.'},{label:'Back Up Third',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Ball to center field? Hustle behind 3rd base to cover a bad throw.'}]},
-  {id:'LCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Left Center',nick:'Gap Closer',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You cover the most ground. Lean in and take a step the moment the coach-pitcher winds up.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw toward SS or 2nd — always. No other targets.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or LF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
-  {id:'RCF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Center',nick:'Cutoff Helper',jobs:[{label:'Move Early',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Best angle on the right side. Move the second the pitch is thrown — attack every ball.'},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Get the ball and throw to 2nd base — always. Straight line back to the infield.'},{label:'Call It',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'You or RF — whoever calls "I got it!" first gets the ball. Other player backs them up.'}]},
-  {id:'RF',badge:'#3d9616',bbg:'rgba(45,110,16,.18)',name:'Right Field',nick:'Right Wall',jobs:[{label:'Attack the Ball',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Run hard at every ball hit your way. Don't wait and watch — go get it."},{label:'One Target: 2B',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:'Throw to 2nd base every time. Too risky to throw to 1st or 3rd from right field.'},{label:'Back Up First',lc:'rgba(61,150,22,.2)',lcolor:'#6dc82a',text:"Ball to the right-side infield? Shade toward 1st base in case of an overthrow your way."}]},
-];
-const GOLDEN_RULES=[
-  {strong:'When in doubt, hold the ball in the infield.',rest:' A held runner beats a wild throw every time.'},
-  {strong:'Move on every pitch.',rest:' The moment the ball is hit, every player has a job. Move first, watch second.'},
-  {strong:'Ball always goes back to the pitcher.',rest:" Play isn't over until the pitcher has the ball in the circle."},
-  {strong:'Have a Plan for 2 Outs.',rest:" A runner crossing home doesn't count if you get a force out (usually 1B). Make the safest, easiest play. Look for the force out, not the tag."},
-];
+  return {buildField,selSc,doPlay,setSpeed};
+})();
 
-function buildGuide(){
-  const sec=document.getElementById('guideSection');
-  const hdr=document.createElement('div'); hdr.className='guide-hdr';
-  hdr.innerHTML='<div class="guide-hdr-line"></div><div class="guide-hdr-text">📋 Position Guide</div><div class="guide-hdr-line"></div>';
-  sec.appendChild(hdr);
-  const gr=document.createElement('div'); gr.className='golden-rules';
-  const grh=document.createElement('div'); grh.className='golden-rules-head';
-  grh.innerHTML='<span class="golden-rules-icon">⭐</span><span class="golden-rules-title">Golden Rules for Every Position</span>';
-  gr.appendChild(grh);
-  const grb=document.createElement('div'); grb.className='golden-rules-body';
-  GOLDEN_RULES.forEach(r=>{
-    const row=document.createElement('div'); row.className='golden-rule';
-    const dot=document.createElement('div'); dot.className='golden-rule-dot';
-    const txt=document.createElement('div'); txt.className='golden-rule-text';
-    txt.innerHTML=`<strong>${r.strong}</strong>${r.rest}`;
-    row.appendChild(dot); row.appendChild(txt); grb.appendChild(row);
-  });
-  gr.appendChild(grb); sec.appendChild(gr);
-  const iL=document.createElement('div'); iL.className='guide-group-label'; iL.textContent='Infield Positions'; sec.appendChild(iL);
-  GUIDE.slice(0,5).forEach(p=>sec.appendChild(makeCard(p)));
-  const oL=document.createElement('div'); oL.className='guide-group-label'; oL.style.marginTop='6px'; oL.textContent='Outfield Positions'; sec.appendChild(oL);
-  GUIDE.slice(5).forEach(p=>sec.appendChild(makeCard(p)));
-  const foot=document.createElement('div'); foot.className='guide-footer'; sec.appendChild(foot);
-}
-
-function makeCard(p){
-  const card=document.createElement('div'); card.className='pos-card'; card.style.borderLeft=`3px solid ${p.badge}`;
-  const head=document.createElement('div'); head.className='pos-card-head';
-  const badge=document.createElement('span'); badge.className='pos-badge'; badge.textContent=p.id; badge.style.cssText=`background:${p.bbg};color:${p.badge};`;
-  const name=document.createElement('span'); name.className='pos-name'; name.textContent=p.name;
-  const nick=document.createElement('span'); nick.className='pos-nick'; nick.textContent=p.nick;
-  head.appendChild(badge); head.appendChild(name); head.appendChild(nick); card.appendChild(head);
-  const ul=document.createElement('ul'); ul.className='pos-jobs';
-  p.jobs.forEach(j=>{
-    const li=document.createElement('li'); li.className='pos-job';
-    const lbl=document.createElement('span'); lbl.className='pos-job-label'; lbl.textContent=j.label; lbl.style.cssText=`background:${j.lc};color:${j.lcolor};`;
-    const txt=document.createElement('span'); txt.className='pos-job-text'; txt.textContent=j.text;
-    li.appendChild(lbl); li.appendChild(txt); ul.appendChild(li);
-  });
-  card.appendChild(ul); return card;
-}
-
-window.addEventListener('resize',()=>{
-  if(!fieldOuter)return;
-  scale=(fieldOuter.clientWidth||440)/DS_W;
-  fieldOuter.style.height=(DS_H*scale)+'px';
-  resetPlayers(true);
-  if(currentSc>=0&&SCENARIOS[currentSc].runner){
-    setTimeout(()=>placeRunner(SCENARIOS[currentSc]),55);
-  }
-});
-window.addEventListener('DOMContentLoaded',()=>{buildField();buildGuide();});
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{ DEF.init(); });
 </script>
 </body>
 </html>
